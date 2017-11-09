@@ -6,12 +6,12 @@ public class Assembler_Application{
 int LOCCTR = 0;
 
 	public static void main(String [] args) throws IOException{ 
-		input dragon = new input("output.txt");
+		input dragon = new input("../files/output.txt");
 		System.out.println();
 		System.out.println();
 		System.out.println("on to the second file.");
-		input other_dragon = new input("output3.txt");
-		source_line frog = new source_line("output.txt");
+		input other_dragon = new input("../files/output3.txt");
+		source_line frog = new source_line("../files/output.txt");
 	}
 //array_of_sourcelines instantiated by int count = input.count(file )
 //SourceLines[] array_of_sourcelines =  new SourceLines[count];

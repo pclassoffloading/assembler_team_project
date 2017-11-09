@@ -4,7 +4,7 @@ import java.util.Scanner;
 import java.util.StringTokenizer;
 public class input{
 File file1;
-String filly = "input.txt";
+String filly = "../files/input.txt";
 
 	public input(String testty) throws IOException{
 
@@ -36,7 +36,7 @@ String filly = "input.txt";
 		while (s.hasNext()){
 			//.next();
 			String word = s.next();
-			//System.out.printf("Line who knows! WORD %d%s\n", count, word);
+			System.out.printf("Line who knows! WORD %d%s\n", count, word);
 			count++;
 		//.useDelimiter("\\s*fish\\s*");
 
