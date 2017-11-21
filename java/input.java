@@ -24,6 +24,14 @@ source_line[] sourcelines;
 		}
 		fileInput1.close();
 	}
+	public int countFile(Scanner fileInput0){
+		int count = 0;
+		while (fileInput0.hasNext()){
+			fileInput0.nextLine();
+			count++;
+		}
+		return count;
+	}
 
 	public void readEachWord(String trythis) throws IOException{
 		Scanner s = new Scanner(trythis).useDelimiter("\\s+");
