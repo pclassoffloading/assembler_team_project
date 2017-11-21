@@ -1,3 +1,16 @@
+//import input.*;
+//import Assembler_Application
+
+
+class PassOne{
+   PassOne(OPTAB optable){
+      DataItem operation = optable.find("ADD");
+      operation.printDataItem();
+      System.out.println(operation.getMnumonic());
+      System.out.println(operation.getFormatN());
+      System.out.println(operation.getOpcode());
+   }
+}
 //This program simulates Pass 1
 //
 //
