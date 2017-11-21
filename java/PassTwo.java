@@ -60,18 +60,50 @@ public String n,i,x,b,p,e; //nixbpe bits used for format 3/4 instructions
 
    public void PCMODE(){
       String label = sourceline.getLabel;
-      //check if label is constant
+      
+      
+      
+      //if immiedate addressing
       if(label.charAt(0) == '#'){
-      //is immiedate direct addressing
-      n = "0";
-      i = "1";
-      b = "0";
-      p = "0";
+         n = "0";
+         i = "1";
+         
+         //if label does not exist in SYMTAB then it is assumed to be a constant
+         if(SYMTAB.find(label.substring(0) != NULL){
+            b = "0";
+            p = "1";
+         }
+         else{
+            b = "0";
+            p = "0";
+         }
       }
       //check if label is indirect addressing
       else if(label.charAt(0) == "@"){
+         n = "1";
+         i = "0";
+         //if exists in SYMTAB is a label, else is a constant
+         if(SYMTAB.find(label.substring(0) != NULL){
+            p = "1";
+            b = "0";
+         }
+         else{
+            p = "0";
+            b = "0";
+         }
       }
-      //else label should be in symtab
+      //else is simple addressing
       else{
+         n = "1";
+         i = "1";
+         //if is not a constant
+         if(SYMTAB.find(label) != NULL){
+            if(sourceline.isIndexed){
+            x = "1";
+            }
+            else{
+            }
+         }
+         
       }
 }
