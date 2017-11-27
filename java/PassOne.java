@@ -1,14 +1,17 @@
 //import input.*;
 //import Assembler_Application
-
-
 class PassOne{
-   PassOne(OPTAB optable){
+  	//String label, mnemonic, symbol;
+  Source_line source_lines[];
+   PassOne(OPTAB optable, Source_line source_lines[]){
+      this.source_lines = source_lines;
       DataItem operation = optable.find("ADD");
       operation.printDataItem();
-      System.out.println(operation.getMnumonic());
-      System.out.println(operation.getFormatN());
-      System.out.println(operation.getOpcode());
+
+      for (Source_line item : source_lines) {
+        System.out.println(item.mnemonic);
+      }
+      //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
 }
 //This program simulates Pass 1
@@ -25,10 +28,10 @@ class PassOne{
 //    SymItem temp = SYMTAB.find(sourceline.getLabel);
 //    addressSpace = temp.getFormatN
 //    LOCTRR += addressSpace
-//    
+//
 //if operation is in i.e WORD RESW BYTE RESBYTE
 //    These calculations are done in Hexadecimal arithmatic
-//    
+//
 //    if WORD
 //       LOCCTR + 3
 //    else if BYTE
