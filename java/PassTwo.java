@@ -18,7 +18,7 @@ class Pass2{
       this.optable = optable;
       this.test = test;
       
-      pass2_assembly();
+      pass2_assembly(sourcelines);
       
    }//Pass2
       
@@ -28,10 +28,11 @@ class Pass2{
       String testy = this.test.convertIntToHex(17099800);
       this.test.convertHexToInt(testy);
           //this.test.addHextoHex("104ec18", "104ec10"); // value put into system.out.println below
-      System.out.println("HERE IS YOUR NEW HEX VALUE: " + this.test.addHextoHex("104ec18", "104ec10"));
+      //System.out.println("HERE IS YOUR NEW HEX VALUE: " + this.test.addHextoHex("104ec18", "104ec10"));
    }
       
-   public void pass2_assembly(){
+   public void pass2_assembly(Source_line[] sourcelines){
+   
       for(int i = 0; i < sourcelines.length; i++){
       
       //    get LOCCTR -- public class variable
@@ -63,6 +64,7 @@ class Pass2{
                   break;
                //format 3 or 4
                case "3/4":
+                  determineIfIndexed(sourcelines[i]);
                   determineAddressing(sourcelines[i]);
                   //if is three
                   if(!(isFour)){
@@ -97,6 +99,13 @@ class Pass2{
          }//if opcode exists
       }//for
    }//end pass_two_assembly
+   
+   public void determineIfIndexed(Source_line sourceline){
+      if(sourceline.isIndexed == true){
+         x = "1";
+      }
+      else x = "0";
+   }
 
    public void determineAddressing(Source_line sourceline){
       String label = sourceline.get_label();
