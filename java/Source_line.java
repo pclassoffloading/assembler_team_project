@@ -32,5 +32,15 @@ class Source_line{
 			case 2: this.symbol = word;break;
 		}
 	}
+   
+   public String get_mnemonic(){
+      return this.mnemonic;
+   }
+   public String get_label(){
+      return this.label;
+   }
+   public String get_symbol(){
+      return this.symbol;
+   }
 //addresses(pass1) opcode(pass2)-- output variables
 }

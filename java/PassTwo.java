@@ -19,7 +19,7 @@ class Pass2{
          if(optable.find(operation) != Null){
          //grap opcode
             opcode = optable.find(operation).getOpcode;      
-            //get format
+            . m//get format
             String format = sourcelines[i].getFormat;
          
             switch(format){
