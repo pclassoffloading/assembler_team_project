@@ -167,7 +167,8 @@ class Pass2{
       String address = symtable.find(label).get_address();
    
       //calculate LOCCTR - addr 
-      mathLib.subHextoHex(address, mathLib.addHextoHex(sourceline.get_address(), optable.find(sourceline.get_mnemonic()).getFormatN()));
+      String LOCCTR = this.mathLib.addHextoHex(sourceline.get_address(), optable.find(sourceline.get_mnemonic()).getFormatN());
+      String displacement = this.mathLib.subHextoHex(address, LOCCTR);
    
    //if is within range set object code
    //else go to BASE mode
