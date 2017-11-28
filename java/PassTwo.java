@@ -47,9 +47,10 @@ class Pass2{
                   //if is three
                   if(!(isFour)){
                      e = "0";
-                  //                First try PC mode
+                     //First try PC mode
+                     PCMODE();
                   //                if PC mode fail
-                  //                   try BASE mode
+                  //                   try BASE mode which is called in PCMODE
                   //                      if BASE mode fail
                   //                         fail source line, print error "format 4 needed for instruction"
                   }//if is three
@@ -58,7 +59,7 @@ class Pass2{
                   else{
                      e = "1";
                   //find target address
-                     String targetAddress = (symtable.find(sourcelines[i].get_symbol())).getAddress;
+                     String targetAddress = (symtable.find(sourcelines[i].get_symbol())).getAddress();
                   
                   //                format of object code is four bytes: ## ## ## ##
                   //                first six bits is opcode code
