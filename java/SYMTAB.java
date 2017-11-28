@@ -38,6 +38,14 @@ class SymItem{
    public String getKey(){
       return label;
    }//getKey
+   
+   public String get_address(){
+      return address;
+   }
+   
+   public String get_label(){
+      return label;
+   }
 
 }//SymItem
 

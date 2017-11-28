@@ -6,6 +6,6 @@ public class InterfaceM {
 
     String testy = test.convertIntToHex(17099800);
     test.convertHexToInt(testy);
-    test.addHextoHex("104ec18", "104ec10");
+    System.out.println("HERE IS YOUR NEW HEX VALUE: " + test.addHextoHex("104ec18", "104ec10"));
    }
 }

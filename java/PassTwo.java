@@ -8,10 +8,30 @@ class Pass2{
    public String n,i,x,b,p,e; //nixbpe bits used for format 3/4 instructions
    public boolean isFour;
    public String objectCode;
+   SYMTAB symtable;
+   OPTAB optable;
+   Math test;
 
 
-   public void Pass2(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines){
-      // for each sourceline
+   public void Pass2(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test){
+      this.symtable = symtable;
+      this.optable = optable;
+      this.test = test;
+      
+      pass2_assembly();
+      
+   }//Pass2
+      
+      
+   public void math_example()
+   {
+      String testy = this.test.convertIntToHex(17099800);
+      this.test.convertHexToInt(testy);
+          //this.test.addHextoHex("104ec18", "104ec10"); // value put into system.out.println below
+      System.out.println("HERE IS YOUR NEW HEX VALUE: " + this.test.addHextoHex("104ec18", "104ec10"));
+   }
+      
+   public void pass2_assembly(){
       for(int i = 0; i < sourcelines.length; i++){
       
       //    get LOCCTR -- public class variable
@@ -43,7 +63,7 @@ class Pass2{
                   break;
                //format 3 or 4
                case "3/4":
-                  determineAddressing();
+                  determineAddressing(sourcelines[i]);
                   //if is three
                   if(!(isFour)){
                      e = "0";
@@ -59,7 +79,7 @@ class Pass2{
                   else{
                      e = "1";
                   //find target address
-                     String targetAddress = (symtable.find(sourcelines[i].get_symbol())).getAddress();
+                     String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
                   
                   //                format of object code is four bytes: ## ## ## ##
                   //                first six bits is opcode code
@@ -76,10 +96,10 @@ class Pass2{
             }//switch
          }//if opcode exists
       }//for
-   }//Pass2
+   }//end pass_two_assembly
 
-   public void determineAddressing(){
-      String label = sourceline.get_label;
+   public void determineAddressing(Source_line sourceline){
+      String label = sourceline.get_label();
       
       //if immiedate addressing
       if(label.charAt(0) == '#'){
@@ -87,7 +107,7 @@ class Pass2{
          i = "1";
          
          //if label does not exist in SYMTAB then it is assumed to be a constant
-         if(symtable.find(label.substring(1) != NULL)){
+         if(symtable.find(label.substring(1)) != null){
             b = "0";
             p = "1";
             PCMODE();
@@ -99,11 +119,11 @@ class Pass2{
          }
       }
       //check if label is indirect addressing
-      else if(label.charAt(0) == "@"){
+      else if(label.charAt(0) == '@'){
          n = "1";
          i = "0";
          //if exists in SYMTAB is a label, else is a constant
-         if(symtable.find(label.substring(1) != NULL)){
+         if(symtable.find(label.substring(1)) != null){
             p = "1";
             b = "0";
          }
@@ -117,7 +137,7 @@ class Pass2{
          n = "1";
          i = "1";
          
-         if(symtable.find(label) != NULL){
+         if(symtable.find(label) != null){
             if(sourceline.isIndexed){
                x = "1";
             }
