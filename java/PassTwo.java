@@ -8,7 +8,7 @@ class Pass2{
    public String n,i,x,b,p,e; //nixbpe bits used for format 3/4 instructions
 
 
-   public void Pass2(sourceline[] sourcelines){
+   public void Pass2(OPTAB optable, SYMTAB symtable, sourceline[] sourcelines){
       // for each sourceline
       for(int i = 0; i < sourcelines.length(); i++){
       
@@ -16,9 +16,9 @@ class Pass2{
       
          String operation = sourcelines[i].getMnumonic;
          //if operation exists in OPTAB (i.e. ADD, STA, etc)
-         if(OPTAB.find(operation) != Null){
+         if(optable.find(operation) != Null){
          //grap opcode
-            opcode = OPTAB.find(operation).getOpcode;      
+            opcode = optable.find(operation).getOpcode;      
             //get format
             String format = sourcelines[i].getFormat;
          
@@ -43,7 +43,7 @@ class Pass2{
                   else{
                      e = "1";
                   //find target address
-                     String targetAddress = (SYMTAB.find(sourceLine.getSymbol)).getAddress;
+                     String targetAddress = (symtable.find(sourceLine.getSymbol)).getAddress;
                   //                object code = opject code cancatanated with the target address
                   //                format of object code is four bytes: ## ## ## ##
                   //                first six bits is opcode code
@@ -71,7 +71,7 @@ class Pass2{
          i = "1";
          
          //if label does not exist in SYMTAB then it is assumed to be a constant
-         if(SYMTAB.find(label.substring(0) != NULL)){
+         if(symtable.find(label.substring(0) != NULL)){
             b = "0";
             p = "1";
             PCMODE();
@@ -87,7 +87,7 @@ class Pass2{
          n = "1";
          i = "0";
          //if exists in SYMTAB is a label, else is a constant
-         if(SYMTAB.find(label.substring(0) != NULL)){
+         if(symtable.find(label.substring(0) != NULL)){
             p = "1";
             b = "0";
          }
@@ -101,7 +101,7 @@ class Pass2{
          n = "1";
          i = "1";
          
-         if(SYMTAB.find(label) != NULL){
+         if(symtable.find(label) != NULL){
             if(sourceline.isIndexed){
                x = "1";
             }
@@ -117,7 +117,7 @@ class Pass2{
    
    String label = sourceline.getLabel();
    
-   String address = SYMTAB.find(label).getAddress();
+   String address = symtable.find(label).getAddress();
    
    //calculate LOCCTR - addr 
    //if is within range set object code
