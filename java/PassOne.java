@@ -5,11 +5,17 @@ class PassOne{
   Source_line source_lines[];
    PassOne(OPTAB optable, Source_line source_lines[]){
       this.source_lines = source_lines;
-      DataItem operation = optable.find("ADD");
-      operation.printDataItem();
 
       for (Source_line item : source_lines) {
-        System.out.println(item.mnemonic);
+        //System.out.println(item.mnemonic);
+        String operation = item.mnemonic;
+        //System.out.println(operation);
+        String add = "ADD";
+        DataItem opperation = optable.find("ADD");
+        //opperation.printDataItem();
+
+        try{DataItem et = optable.find(operation);
+        et.printDataItem();}catch (Exception e) {};
       }
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
