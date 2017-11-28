@@ -9,8 +9,8 @@ class PassOne{
       for (Source_line item : source_lines) {
         //System.out.println(item.mnemonic);
         String operation = item.mnemonic;
-        //try{DataItem et = optable.find(operation);
-        //et.printDataItem();}catch (Exception e) {};
+        try{DataItem et = optable.find(operation);
+        et.printDataItem();}catch (Exception e) {};
       }
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
