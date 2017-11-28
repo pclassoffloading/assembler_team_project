@@ -17,7 +17,7 @@ Source_line source_lines[];
 		initialize_vars(fileName);
 		readEachLine(this.fileLines);
 
-		provide_source_lines();
+//		provide_source_lines();
 	}
 	public void readEachLine(Scanner fileInput1)throws IOException{
 		while (fileInput1.hasNext()){
@@ -55,7 +55,7 @@ Source_line source_lines[];
 	}
 
 	public int count_words(Scanner fileWords)throws IOException{
-		int count = -1;
+		int count = 0;
 		while (this.fileWords.hasNext()){
 			String word = this.fileWords.next();
 			//System.out.printf("Line who knows! WORD %d%s\n", count, word);
@@ -75,10 +75,11 @@ Source_line source_lines[];
 			//System.out.printf("Line who knows! WORD %d%s\n", word_numb, word);
 			source_lines[srcln_count].add_word(total_line_count, word_numb, word);
 
-
+			//source_lines[srcln_count].tell_source_line();
 			//System.out.printf("Line who knows! WORD %d%s\n", count, word);
 			word_numb++;
 		}
+
 		//source_lines[srcln_count].tell_source_line();
 		this.srcln_count++;
 		return word_numb;
