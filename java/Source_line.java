@@ -1,6 +1,6 @@
 
 class Source_line{
-	String label, mnemonic, symbol;
+	String label, mnemonic, symbol, address;
 
 	public Source_line(){
 	}
@@ -41,6 +41,9 @@ class Source_line{
    }
    public String get_symbol(){
       return this.symbol;
+   }
+   public String get_address(){
+      return this.address;
    }
    
 //addresses(pass1) opcode(pass2)-- output variables

@@ -10,13 +10,13 @@ class Pass2{
    public String objectCode;
    SYMTAB symtable;
    OPTAB optable;
-   Math test;
+   Math mathLib;
 
 
    public void Pass2(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test){
       this.symtable = symtable;
       this.optable = optable;
-      this.test = test;
+      this.mathLib = test;
       
       pass2_assembly(sourcelines);
       
@@ -25,10 +25,10 @@ class Pass2{
       
    public void math_example()
    {
-      String testy = this.test.convertIntToHex(17099800);
-      this.test.convertHexToInt(testy);
-          //this.test.addHextoHex("104ec18", "104ec10"); // value put into system.out.println below
-      //System.out.println("HERE IS YOUR NEW HEX VALUE: " + this.test.addHextoHex("104ec18", "104ec10"));
+      // String testy = this.test.convertIntToHex(17099800);
+//       this.test.convertHexToInt(testy);
+//           //this.test.addHextoHex("104ec18", "104ec10"); // value put into system.out.println below
+//       //System.out.println("HERE IS YOUR NEW HEX VALUE: " + this.test.addHextoHex("104ec18", "104ec10"));
    }
       
    public void pass2_assembly(Source_line[] sourcelines){
@@ -162,10 +162,13 @@ class Pass2{
    public void PCMODE(Source_line sourceline){
    
       String label = sourceline.get_label();
-      //get address label   
+      
+      //get address of label   
       String address = symtable.find(label).get_address();
    
-   //calculate LOCCTR - addr 
+      //calculate LOCCTR - addr 
+      mathLib.subHextoHex(address, mathLib.addHextoHex(sourceline.get_address(), optable.find(sourceline.get_mnemonic()).getFormatN()));
+   
    //if is within range set object code
    //else go to BASE mode
    
