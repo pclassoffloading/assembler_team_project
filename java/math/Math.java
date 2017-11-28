@@ -11,11 +11,17 @@ public class Math {
     return testy;
   }
 
-  public void convertHexToInt(String i){
+  public int convertHexToInt(String i){
     //System.out.println(i);
     int n = (int) Long.parseLong(i, 16);
     System.out.println("Number = " + n);
-
+    return n;
+  }
+  public void addHextoHex(String val1, String val2){
+    //System.out.println(i);
+    int test = convertHexToInt(val1) + convertHexToInt(val2);
+    convertIntToHex(test);
+    //System.out.println(test);
   }
 
 
