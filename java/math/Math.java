@@ -23,6 +23,12 @@ public class Math {
     return convertIntToHex(test);
     //System.out.println(test);
   }
+  
+  public String subHextoHex(String val1, String val2){
+  
+  int test = convertHexToInt(val1) - convertHexToInt(val2);
+  return convertIntToHex(test);
+  }
 
 
-}
+}//endMath
