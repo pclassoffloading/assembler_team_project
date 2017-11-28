@@ -64,13 +64,12 @@ class Pass2{
                   break;
                //format 3 or 4
                case "3/4":
-                  determineIfIndexed(sourcelines[i]);
+                  //determineIfIndexed(sourcelines[i]);
                   determineAddressing(sourcelines[i]);
                   //if is three
                   if(!(isFour)){
                      e = "0";
-                     //First try PC mode
-                     PCMODE();
+                  //First try PC mode
                   //                if PC mode fail
                   //                   try BASE mode which is called in PCMODE
                   //                      if BASE mode fail
@@ -100,12 +99,12 @@ class Pass2{
       }//for
    }//end pass_two_assembly
    
-   public void determineIfIndexed(Source_line sourceline){
-      if(sourceline.isIndexed == true){
-         x = "1";
-      }
-      else x = "0";
-   }
+//    public void determineIfIndexed(Source_line sourceline){
+//       if(sourceline.isIndexed == true){
+//          x = "1";
+//       }
+//       else x = "0";
+//    }
 
    public void determineAddressing(Source_line sourceline){
       String label = sourceline.get_label();
@@ -119,14 +118,14 @@ class Pass2{
          if(symtable.find(label.substring(1)) != null){
             b = "0";
             p = "1";
-            PCMODE();
          }
          else{
             b = "0";
             p = "0";
             //objectcode = opcode nixbpe hexadecimal value of constant with leading zeros
          }
-      }
+      }//end immiediate addressing
+      
       //check if label is indirect addressing
       else if(label.charAt(0) == '@'){
          n = "1";
@@ -140,29 +139,31 @@ class Pass2{
             p = "0";
             b = "0";
          }
-      }
+      }//end indirect addressing
+      
       //else is simple addressing
       else{
          n = "1";
          i = "1";
-         
+         //if exists in SYMTAB is a label, else is a constant
          if(symtable.find(label) != null){
-            if(sourceline.isIndexed){
-               x = "1";
-            }
-            else{
-            }
-         }//if is not a constant
+            p = "1";
+            b = "0";
+         }
+         else{
+            p = "0";
+            b = "0";
+         }
          
       }//else simple addressing
    
    }//determineAddressing
 
-   public void PCMODE(){
+   public void PCMODE(Source_line sourceline){
    
-      String label = sourceline.getLabel();
-   
-      String address = symtable.find(label).getAddress();
+      String label = sourceline.get_label();
+      //get address label   
+      String address = symtable.find(label).get_address();
    
    //calculate LOCCTR - addr 
    //if is within range set object code
