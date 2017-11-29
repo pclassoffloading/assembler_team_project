@@ -1,8 +1,8 @@
 // public class testingOptab {
-//     
+//
 //    public static void main(String args[]){
 //    SYMTAB symTable = new SYMTAB();
-//    
+//
 //    symTable.createSymItem("DRESSER", "1000");
 //    symTable.createSymItem("HAPPY", "1200");
 //    symTable.createSymItem("CREATE", "4334");
@@ -10,11 +10,11 @@
 //    symTable.createSymItem("OMEGA", "4334");
 //    symTable.createSymItem("OMEGA", "4334");
 //    symTable.createSymItem("OMEGA", "4334");
-// 
-//    
+//
+//
 //    symTable.displayTable();
-//      
-//          
+//
+//
 //    }//main
 // }//testingOptab
 
@@ -23,26 +23,26 @@
 class SymItem{
    String label;
    String address;
-    
+
    public SymItem(String label, String address){
       this.label = label;
       this.address = address;
    }//constructor SymItem
- 
+
    public void printSymItem(){
       System.out.println(label);
       System.out.println(address);
-   
+
    }//printSymItem
- 
+
    public String getKey(){
       return label;
    }//getKey
-   
+
    public String get_address(){
       return address;
    }
-   
+
    public String get_label(){
       return label;
    }
@@ -55,14 +55,14 @@ class SYMTAB
    private int arraySize;
    private int symCount;
 
-   
+
    public SYMTAB(){
-    
+
     //get ArraySize as akin to a Hash Table
-    arraySize = getPrime(50);//array size is the first prime number of twice the number of mnumonics 
+    arraySize = getPrime(50);//array size is the first prime number of twice the number of mnumonics
     SYMARRAY = new SymItem[arraySize];//will create a prime sized array based on the number of mnumonics
-   
-   
+
+
    }//constuctor OPTAB
    public void displayTable()
    {
@@ -70,7 +70,7 @@ class SYMTAB
       String row = "%-7d%-20s\n";
       float probeSum = 0;
       int numItems = 0;
-      
+
       System.out.println("\nSYMTAB");
       System.out.print(header);
       for(int j=0; j < arraySize; j++)
@@ -82,19 +82,19 @@ class SYMTAB
          }
       }
    }//displayTable
-   
-   
+
+
    public void createSymItem(String label, String address){
        SymItem item = new SymItem(label, address);
        insert(item);
    }
-   
+
    public void insert(SymItem item)
    {
       String key = item.getKey();
       int hashVal = hashFunc(key);
       int k = 0;
-   
+
    //until empty cell or nonItem
       while(SYMARRAY[hashVal] != null && SYMARRAY[hashVal].getKey() != "-1")
       {
@@ -106,9 +106,9 @@ class SYMTAB
       SYMARRAY[hashVal] = item;//insert new item
       symCount++;//increase symCount
    }//insert
-   
 
-   
+
+
    public int hashFunc(String key)
    {
       int hashVal = 0;
@@ -119,13 +119,13 @@ class SYMTAB
       }
       return hashVal;
    }//hashFunc
-   
-   
+
+
    public SymItem find(String key)
    {
       int hashVal = hashFunc(key);
       int k = 0;
-   
+
       while(SYMARRAY[hashVal] != null)
       {
          if(SYMARRAY[hashVal].getKey().equals(key))
@@ -134,18 +134,18 @@ class SYMTAB
          hashVal += (2*k+1);
          ++k;
          hashVal %= arraySize; //wraparound
-      
+
       }//while
       return null; //couldn't find it
    }//find
-   
-   
+
+
    public int findProbeLength(String key)
    {
       int hashVal = hashFunc(key);
       int probeLength = 1;//initialize to 1
       int k = 0;
-   
+
       while(SYMARRAY[hashVal] != null)
       {
          if(SYMARRAY[hashVal].getKey().equals(key))
@@ -155,12 +155,12 @@ class SYMTAB
          ++k;
          ++probeLength;//increase probeLength
          hashVal %= arraySize; //wraparound
-      
+
       }//while
       return probeLength; //couldn't find it
    }//find
-   
-   
+
+
 
    public static int getPrime(int min)
    {
@@ -170,7 +170,7 @@ class SYMTAB
             return j;
       }//for
    }//getPrime
-   
+
    public static boolean isPrime(int n)
    {
       for(int j = 2; (j*j <= n); j++)
@@ -180,6 +180,6 @@ class SYMTAB
       }//for
       return true;
    }//iPrime
-      
-   
+
+
 }//SYMTAB

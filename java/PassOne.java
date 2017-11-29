@@ -7,7 +7,7 @@ class PassOne{
       this.source_lines = source_lines;
 
       for (Source_line item : source_lines) {
-        //System.out.println(item.mnemonic);
+        System.out.println(item.mnemonic);
         String operation = item.mnemonic;
         try{DataItem et = optable.find(operation);
         et.printDataItem();}catch (Exception e) {};
