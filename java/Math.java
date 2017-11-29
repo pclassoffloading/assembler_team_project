@@ -29,4 +29,12 @@ public class Math {
     return convertIntToHex(test);
   }
 
+  static String hexToBin(String s) {
+    return new BigInteger(s, 16).toString(2);
+  }
+
+  // static String binToHex(String s) {
+  //   return new BigInteger(s, 16).toString(2);
+  // }
+
 }
