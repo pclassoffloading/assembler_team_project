@@ -11,6 +11,8 @@ class PassTwo{
    SYMTAB symtable;
    OPTAB optable;
    Math mathLib;
+   
+   String B_Register;
 
 
    PassTwo(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test){
@@ -33,59 +35,68 @@ class PassTwo{
    public void pass2_assembly(Source_line[] sourcelines){
    
       for(int i = 0; i < sourcelines.length; i++){
-
-
+      
+      
          try{
          
             String operation = sourcelines[i].get_mnemonic();
             
-            //check if is format 4
-            if(operation.charAt(0) == '+')
-            {
-               isFour = true;
-               operation = operation.substring(1);
+            //If is BASE command
+            if(operation.equals("BASE")){
+            
+            //set B register
+               this.B_Register = sourcelines[i].get_address();
+            
             }
-            else{
-               isFour = false;
-            }
+            else {
+            
+               //check if is format 4
+               if(operation.charAt(0) == '+')
+               {
+                  isFour = true;
+                  operation = operation.substring(1);
+               }
+               else{
+                  isFour = false;
+               }
             
             //if operation exists in OPTAB (i.e. ADD, STA, etc)
-            if(optable.find(operation) != null){
-            //grap opcode
-               String opcode = optable.find(operation).getOpcode();
-            //get format
-               String format = optable.find(operation).getFormatN();
-            
-               switch(format){
-               //format 1
-                  case "1":
-                     objectCode = opcode;
-                     break;
-               //format 2
-                  case "2":
-                     break;
-               //format 3 or 4
-                  case "3/4":
-                  
+               if(optable.find(operation) != null){
+               //grap opcode
+                  String opcode = optable.find(operation).getOpcode();
+               //get format
+                  String format = optable.find(operation).getFormatN();
+               
+                  switch(format){
+                  //format 1
+                     case "1":
+                        objectCode = opcode;
+                        break;
+                  //format 2
+                     case "2":
+                        break;
+                  //format 3 or 4
+                     case "3/4":
+                     
                      //determineIfIndexed(sourcelines[i]);
-                     determineAddressing(sourcelines[i]);
+                        determineAddressing(sourcelines[i]);
                      
                      //if is three
-                     if(!(isFour)){
-                        e = "0";
-                     //First try PC mode
-                        PCMODE(sourcelines[i], sourcelines[i+1]);
-                     //                if PC mode fail
-                     //                   try BASE mode which is called in PCMODE
-                     //                      if BASE mode fail
-                     //                         fail source line, print error "format 4 needed for instruction"
-                     }//if is three
-                     
-                     //if is four
-                     else{
-                        e = "1";
+                        if(!(isFour)){
+                           e = "0";
+                        //First try PC mode
+                           PCMODE(sourcelines[i], sourcelines[i+1]);
+                        //                if PC mode fail
+                        //                   try BASE mode which is called in PCMODE
+                        //                      if BASE mode fail
+                        //                         fail source line, print error "format 4 needed for instruction"
+                        }//if is three
+                        
+                        //if is four
+                        else{
+                           e = "1";
                         //find target address
-                        String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
+                           String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
                         
                         //convert opcode to binary, and "chop off" last two bits
                         //String opcodeBinary = mathLib.hexToBinary(opcode);
@@ -100,25 +111,27 @@ class PassTwo{
                         //then convert back to Hex
                         //objectCode = mathLib.binaryToHex(binaryObjectCode);s
                         
-                     //                Format 4 Instruction
-                     //                format of object code is four bytes: ## ## ## ##
-                     //                first six bits is opcode code
-                     //                next six bits is nixbpe
-                     //                next 20 bits are address
-                     //                last four bytes are target address
-                     
-                     }//if is four
-                  default:
-               //                  should not reach here
-               //                  if it does, throw error
-               //
-               //
-               //         write object code to text file
-               }//switch
-            }//if opcode exists
-            else{
+                        //                Format 4 Instruction
+                        //                format of object code is four bytes: ## ## ## ##
+                        //                first six bits is opcode code
+                        //                next six bits is nixbpe
+                        //                next 20 bits are address
+                        //                last four bytes are target address
+                        
+                        }//if is four
+                     default:
+                  //                  should not reach here
+                  //                  if it does, throw error
+                  //
+                  //
+                  //         write object code to text file
+                  }//switch
+               }//if opcode exists
+               else{
+               
+               }
+            }//else if not BASE command
             
-            }
          }
          catch (Exception e) {};
       }//for
@@ -212,8 +225,8 @@ class PassTwo{
 
    public void BASEMODE(String address){
    //Switched to Base Mode relative addressing
-   p = "0";
-   b = "1";
+      p = "0";
+      b = "1";
    //calculate address - BASE register
    //if displacement is bigger than 4095 or less than 0, then fail
    }//BASEMODE
