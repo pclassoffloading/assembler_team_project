@@ -3,16 +3,31 @@
 class PassOne{
   	//String label, mnemonic, symbol;
   Source_line source_lines[];
-   PassOne(OPTAB optable, Source_line source_lines[]){
+  SYMTAB symtab;
+   PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
       this.source_lines = source_lines;
+      this.symtab = symtab;
+      String LOCCTR = "0";
 
       for (Source_line item : source_lines) {
-        System.out.println(item.mnemonic);
+        //System.out.println(item.mnemonic);
         String operation = item.mnemonic;
-        try{DataItem et = optable.find(operation);
-        et.printDataItem();}catch (Exception e) {};
+        try{
+          DataItem et = optable.find(operation);
+          et.printDataItem();
+
+          this.symtab.createSymItem(item.label, LOCCTR);
+          SymItem temp = this.symtab.find(item.label);
+
+
+
+        }catch (Exception e) {};
       }
-      //System.out.println(operation.getMnumonic());System.out.println(operat3ion.getFormatN());System.out.println(operation.getOpcode());
+
+
+
+
+      //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
 }
 //This program simulates Pass 1
@@ -24,7 +39,7 @@ class PassOne{
 //for each sourceline
 //    operation = sourceLine.getMnumonic;
 //if operation is in OPTAB
-// if(OPTAB.find(operation) != null)
+// if(OPTAB.find(operation) != Null)
 //    SYMTAB.createSymItem(sourceline.getLabel, LOCCTR);
 //    SymItem temp = SYMTAB.find(sourceline.getLabel);
 //    addressSpace = temp.getFormatN
