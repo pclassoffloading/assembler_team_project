@@ -1,6 +1,6 @@
 
 class Source_line{
-	String label, mnemonic, symbol, address;
+	String label, mnemonic, symbol, address, objectCode;
 
 	public Source_line(){
 	}
