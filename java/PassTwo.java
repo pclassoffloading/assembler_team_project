@@ -115,7 +115,7 @@ class PassTwo{
                            String opcodeBinary = mathLib.hexToBin(opcode);
                             System.out.println(opcodeBinary);
                            //chop off
-                           opcodeBinary = opcodeBinary.substring(0,6);
+                           opcodeBinary = opcodeBinary.substring(0,5);
 
                            //convert address to binary
                            String binaryAddress = mathLib.hexToBin(targetAddress);
