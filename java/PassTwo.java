@@ -119,13 +119,11 @@ class PassTwo{
 
                            //convert address to binary
                            String binaryAddress = mathLib.hexToBin(targetAddress);
-<<<<<<< HEAD
+
                            System.out.println("binaryAddress:" + binaryAddress);
 
-=======
                            //System.out.println("binaryAddress:" + binaryAddress);
 
->>>>>>> master
                            //then we concatanate with n,i,x,b,p,e and adddress
                            String binaryObjectCode = opcodeBinary + n + i + x + b + p + e + binaryAddress;
                            System.out.println("binaryObjectCode:" + binaryObjectCode);
