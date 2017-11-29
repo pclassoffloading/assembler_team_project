@@ -2,7 +2,7 @@ class DataItem{
    public String mnumonic;
    public String opcode;
    public String formatN;
-
+   public boolean isFour;
 
    public DataItem(String mnumonic, String formatN, String opcode){
       this.mnumonic = mnumonic;
@@ -16,6 +16,10 @@ class DataItem{
       System.out.println(opcode);
       System.out.println(formatN);
 
+   }
+
+   public void setIsFour(boolean isFour){
+      this.isFour = isFour;
    }
 
    public String getKey(){

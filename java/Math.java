@@ -32,7 +32,8 @@ public class Math {
 
   static String hexToBin(String s) {
     String testy = new BigInteger(s, 16).toString(2);
-    return testy;
+    String formatty = ("00000000" + testy).substring(testy.length());
+    return formatty;
   }
 
   static String binToHex(String s) {

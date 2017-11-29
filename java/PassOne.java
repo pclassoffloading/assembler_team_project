@@ -5,6 +5,7 @@ class PassOne{
   Source_line source_lines[];
   SYMTAB symtab;
   OPTAB optable;
+  boolean isFour;
    PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
      this.optable = optable;
       this.source_lines = source_lines;
@@ -20,18 +21,41 @@ class PassOne{
 
           this.symtab.createSymItem(item.label, LOCCTR);
           DataItem temp = this.optable.find(item.mnemonic);
-          String addressSpace = temp.formatN;
-          System.out.println("addressSpace");
-          System.out.println(addressSpace);
+
+          System.out.println("mneumonic: " + find_format(temp).mnumonic + " formatN: " + find_format(temp).formatN + " format_4: " + find_format(temp).isFour);
 
         }catch (Exception e) {};
       }
 
-
-
-
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
+   public DataItem find_format(DataItem temp){
+     //temp.formatN, temp.mnumonic
+
+     switch (temp.formatN) {
+        case "2": //not_sure_yet();
+           return temp; // do I need to return???
+        case "3": temp = is_format_4(temp);
+           return temp;
+     }
+     //System.out.println("passone, ln 41 reached");
+     return temp;
+   }
+
+   public DataItem is_format_4(DataItem temp){
+     if(temp.mnumonic.charAt(0) == '+')
+     {
+        temp.setIsFour(true);
+        temp.mnumonic = temp.mnumonic.substring(1);
+        return temp;
+     }
+     else{
+        temp.setIsFour(false);
+        return temp;
+     }
+ }
+
+
 }
 //This program simulates Pass 1
 //
