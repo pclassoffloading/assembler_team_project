@@ -3,9 +3,8 @@ import java.lang.*;
 import java.math.BigInteger;
 
 public class Math {
-  public Math() {
-
-   }
+  public Math() {}
+    
   public String convertIntToHex(int i){
     System.out.println("Number = " + i);
     System.out.println("Hex = " + Integer.toHexString(i));
@@ -19,13 +18,14 @@ public class Math {
     System.out.println("Number = " + n);
     return n;
   }
+
   public String addHextoHex(String val1, String val2){
     //System.out.println(i);
     int test = convertHexToInt(val1) + convertHexToInt(val2);
-
     return convertIntToHex(test);
 
   }
+
   public String subHextoHex(String val1, String val2){
     int test = convertHexToInt(val1) - convertHexToInt(val2);
     return convertIntToHex(test);
@@ -35,8 +35,9 @@ public class Math {
     return new BigInteger(s, 16).toString(2);
   }
 
-  // static String binToHex(String s) {
-  //   return new BigInteger(s, 16).toString(2);
-  // }
+  static String binToHex(String s) {
+    int numInDec = Integer.parseInt(s, 2);
+    String hexString = Integer.toHexString(numInDec);
+  }
 
 }

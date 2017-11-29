@@ -45,7 +45,7 @@ class PassTwo{
             if(operation.equals("BASE")){
 
             //set B register
-               this.B_Register = sourcelines[i].get_address();
+            this.B_Register = sourcelines[i].get_address();
 
             }
             else {
