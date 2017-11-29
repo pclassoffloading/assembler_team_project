@@ -1,6 +1,7 @@
 
 class Source_line{
    String label, mnemonic, symbol, address, objectCode;
+   boolean isFour = false;//default is false
 
    public Source_line(){
    }
@@ -56,6 +57,10 @@ class Source_line{
    
    public void set_objectCode(String objectCode){
       this.objectCode = objectCode;
+   }
+   
+   public void set_format4(){
+      this.isFour = true;
    }
    
 //addresses(pass1) opcode(pass2)-- output variables

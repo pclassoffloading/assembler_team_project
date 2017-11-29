@@ -24,11 +24,35 @@ class PassOne{
          }
          else{
             try{
-               this.symtab.createSymItem(item.label, LOCCTR);
-               DataItem temp = this.optable.find(item.mnemonic);
-               temp = find_format(temp, item.mnemonic);
-               temp.printDataItem();
-               System.out.println("mneumonic: " + temp.mnumonic + " formatN: " + temp.formatN + " format_4: " + temp.isFour);
+               //format is of LABEL MNEMONIC SYMBOL
+               //If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN
+               //i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
+               if(item.mnemonic.charAt(0) == '+'){
+                  //then is format 4 isntruction
+                  //set boolean value stored in source_lines to true
+                  item.set_format4();
+               }
+               if(this.optable.find(item.mnemonic) != null){
+               
+                  //grab temp object
+                  DataItem temp = this.optable.find(item.mnemonic);
+                  
+                  //local formatNumber string set to formatN of DataItem
+                  String formatNumber = temp.formatN;
+                  
+                  //if 3/4 need to determine if format 4 was declared
+                  if((temp.formatN).equals("3/4")){
+                  
+                  }
+                  temp = find_format(temp, item.mnemonic);
+                 
+                  temp.printDataItem();
+                  System.out.println("mneumonic: " + temp.mnumonic + " formatN: " + temp.formatN + " format_4: " + temp.isFour);
+                  this.symtab.createSymItem(item.label, LOCCTR);
+               }
+               else{
+               //if the mnemonic was not in OPTAB then we check if is a 'variable declaration' i.e. WORD RESW BYTE
+               }
             }
             catch (Exception e) {};
          }
@@ -40,7 +64,10 @@ class PassOne{
    public DataItem find_format(DataItem temp, String mneumonic){
      //temp.formatN, temp.mnumonic
    
-      switch (temp.formatN.charAt(0)) {
+      switch (temp.formatN) {
+         case '1':
+            return 1;
+            break;
          case '2': //not_sure_yet();
          
             return temp; // do I need to return???
