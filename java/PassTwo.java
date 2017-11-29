@@ -22,7 +22,10 @@ class PassTwo{
       this.optable = optable;
       this.mathLib = test;
       pass2_assembly(sourcelines);
+<<<<<<< HEAD
    
+=======
+>>>>>>> merge conflict resolve
    }//Pass2
 
 

@@ -16,40 +16,42 @@ class PassOne{
         //System.out.println(item.mnemonic);
         String operation = item.mnemonic;
         try{
-          DataItem et = optable.find(operation);
-          //et.printDataItem();
-
           this.symtab.createSymItem(item.label, LOCCTR);
           DataItem temp = this.optable.find(item.mnemonic);
-
-          System.out.println("mneumonic: " + find_format(temp).mnumonic + " formatN: " + find_format(temp).formatN + " format_4: " + find_format(temp).isFour);
-
+          temp = find_format(temp, item.mnemonic);
+          temp.printDataItem();
+          System.out.println("mneumonic: " + temp.mnumonic + " formatN: " + temp.formatN + " format_4: " + temp.isFour);
         }catch (Exception e) {};
       }
 
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
-   public DataItem find_format(DataItem temp){
+   //or should it be sourceline?
+   public DataItem find_format(DataItem temp, String mneumonic){
      //temp.formatN, temp.mnumonic
 
-     switch (temp.formatN) {
-        case "2": //not_sure_yet();
+     switch (temp.formatN.charAt(0)) {
+        case '2': //not_sure_yet();
+
            return temp; // do I need to return???
-        case "3": temp = is_format_4(temp);
+        case '3': temp = is_format_4(temp, mneumonic);
+
            return temp;
      }
      //System.out.println("passone, ln 41 reached");
      return temp;
    }
 
-   public DataItem is_format_4(DataItem temp){
+   public DataItem is_format_4(DataItem temp, String mneumonic){
      if(temp.mnumonic.charAt(0) == '+')
      {
+       System.out.println("true reached");
         temp.setIsFour(true);
-        temp.mnumonic = temp.mnumonic.substring(1);
+        temp.mnumonic = mneumonic.substring(1);
         return temp;
      }
      else{
+              System.out.println("false reached");
         temp.setIsFour(false);
         return temp;
      }
