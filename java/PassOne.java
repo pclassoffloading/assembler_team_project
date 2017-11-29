@@ -7,16 +7,17 @@ class PassOne{
    PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
       this.source_lines = source_lines;
       this.symtab = symtab;
+      String LOCCTR = "0";
 
       for (Source_line item : source_lines) {
-        System.out.println(item.mnemonic);
+        //System.out.println(item.mnemonic);
         String operation = item.mnemonic;
         try{
           DataItem et = optable.find(operation);
           et.printDataItem();
 
-          SYMTAB.createSymItem(sourceline.getLabel, LOCCTR);
-
+          this.symtab.createSymItem(item.label, LOCCTR);
+          SymItem temp = this.symtab.find(item.label);
 
 
 
