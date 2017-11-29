@@ -115,7 +115,8 @@ class PassTwo{
                            String opcodeBinary = mathLib.hexToBin(opcode);
                             System.out.println(opcodeBinary);
                            //chop off
-                           opcodeBinary = opcodeBinary.substring(0,5);
+                           opcodeBinary = opcodeBinary.substring(0,6);
+                           System.out.println("Binary opcode: " + opcodeBinary);
 
                            //convert address to binary
                            String binaryAddress = mathLib.hexToBin(targetAddress);
@@ -125,7 +126,8 @@ class PassTwo{
                            //System.out.println("binaryAddress:" + binaryAddress);
 
                            //then we concatanate with n,i,x,b,p,e and adddress
-                           String binaryObjectCode = opcodeBinary + n + i + x + b + p + e + binaryAddress;
+                           
+                           String binaryObjectCode = opcodeBinary + this.n + this.i + this.x + this.b + this.p + this.e + binaryAddress;
                            System.out.println("binaryObjectCode:" + binaryObjectCode);
 
                            //then convert back to Hex
