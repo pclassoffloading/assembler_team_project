@@ -59,7 +59,6 @@ class PassOne{
    //   this.symtab.createSymItem(item.label, LOCCTR);
    // }
 
-
    public boolean does_mnemonic_exist(Source_line item, String mnemonic){
     if(this.optable.find(item.mnemonic) != null){//grab temp object
       return true
@@ -69,45 +68,6 @@ class PassOne{
        //if the mnemonic was not in OPTAB then we check if is a 'variable declaration' i.e. WORD RESW BYTE
     }
   }
-
-
-
-
-   //or should it be sourceline? <<<<<<< Yes should be in source_line
-   public DataItem find_format(DataItem temp, String mneumonic){
-     //temp.formatN, temp.mnumonic
-
-      switch (temp.formatN) {
-         case "1":
-            break;
-         case "2": //not_sure_yet();
-
-            return temp; // do I need to return???
-         case "3": //temp = is_format_4(temp, mneumonic);
-
-            return temp;
-      }
-     //System.out.println("passone, ln 41 reached");
-      return temp;
-   }
-
-   //NO this is not how we do it
-//    public DataItem is_format_4(DataItem temp, String mneumonic){
-//      if(temp.mnumonic.charAt(0) == '+')
-//      {
-//        System.out.println("true reached");
-//         temp.setIsFour(true);
-//         temp.mnumonic = mneumonic.substring(1);
-//         return temp;
-//      }
-//      else{
-//               System.out.println("false reached");
-//         temp.setIsFour(false);
-//         return temp;
-//      }
-//  }
-
-
 }
 //This program simulates Pass 1
 //

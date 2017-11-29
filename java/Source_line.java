@@ -55,6 +55,9 @@ class Source_line{
    public String get_address(){
       return this.address;
    }
+   public void set_address(String address){
+      this.address = address;
+   }
 
    public void set_objectCode(String objectCode){
       this.objectCode = objectCode;
