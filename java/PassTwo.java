@@ -17,7 +17,7 @@ class PassTwo{
       this.symtable = symtable;
       this.optable = optable;
       this.mathLib = test;
-
+      PCMODE(sourcelines);
       pass2_assembly(sourcelines);
 
    }//Pass2
@@ -161,16 +161,25 @@ try{
     }catch (Exception e) {};
    }//determineAddressing
 
-   public void PCMODE(Source_line sourceline){
+   public void PCMODE(Source_line[] source_lines){
 
-      String label = sourceline.get_label();
 
-      //get address of label
-      String address = symtable.find(label).get_address();
+      for (Source_line item : source_lines) {
+      try{  //calculate LOCCTR - addr
 
-      //calculate LOCCTR - addr
-      //String LOCCTR = this.mathLib.addHextoHex(sourceline.get_address(), optable.find(sourceline.get_mnemonic()).getFormatN());
-      //String displacement = this.mathLib.subHextoHex(address, LOCCTR);
+        String label = item.get_label();
+//System.out.println(label);
+        //get address of label
+        System.out.println(label);
+        System.out.println("aeoiehoaisdhoiashdoi");
+        String address = this.symtable.find(label).get_address();
+
+        String LOCCTR = this.mathLib.addHextoHex(item.get_address(), this.optable.find(item.get_mnemonic()).getFormatN());
+        //System.out.println("this is an addition" + LOCCTR);
+        String displacement = this.mathLib.subHextoHex(address, LOCCTR);
+        }catch (Exception e) {};
+      }
+
 
    //if is within range set object code
    //else go to BASE mode

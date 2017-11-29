@@ -17,12 +17,16 @@ public class Math {
     System.out.println("Number = " + n);
     return n;
   }
-  public void addHextoHex(String val1, String val2){
+  public String addHextoHex(String val1, String val2){
     //System.out.println(i);
     int test = convertHexToInt(val1) + convertHexToInt(val2);
-    convertIntToHex(test);
-    //System.out.println(test);
-  }
 
+    return convertIntToHex(test);
+
+  }
+  public String subHextoHex(String val1, String val2){
+    int test = convertHexToInt(val1) - convertHexToInt(val2);
+    return convertIntToHex(test);
+  }
 
 }
