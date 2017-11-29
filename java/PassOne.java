@@ -26,7 +26,7 @@ class PassOne{
 
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
-   //or should it be sourceline?
+   //or should it be sourceline? <<<<<<< Yes should be in source_line
    public DataItem find_format(DataItem temp, String mneumonic){
      //temp.formatN, temp.mnumonic
 
@@ -41,21 +41,22 @@ class PassOne{
      //System.out.println("passone, ln 41 reached");
      return temp;
    }
-
-   public DataItem is_format_4(DataItem temp, String mneumonic){
-     if(temp.mnumonic.charAt(0) == '+')
-     {
-       System.out.println("true reached");
-        temp.setIsFour(true);
-        temp.mnumonic = mneumonic.substring(1);
-        return temp;
-     }
-     else{
-              System.out.println("false reached");
-        temp.setIsFour(false);
-        return temp;
-     }
- }
+   
+   //NO this is not how we do it
+//    public DataItem is_format_4(DataItem temp, String mneumonic){
+//      if(temp.mnumonic.charAt(0) == '+')
+//      {
+//        System.out.println("true reached");
+//         temp.setIsFour(true);
+//         temp.mnumonic = mneumonic.substring(1);
+//         return temp;
+//      }
+//      else{
+//               System.out.println("false reached");
+//         temp.setIsFour(false);
+//         return temp;
+//      }
+//  }
 
 
 }
