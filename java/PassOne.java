@@ -7,49 +7,53 @@ class PassOne{
    OPTAB optable;
    boolean isFour;
    String LOCCTR = "0";
+
    PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
       this.optable = optable;
       this.source_lines = source_lines;
       this.symtab = symtab;
-      boolean exist
 
-      for (Source_line item : source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
-        try{
-          if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
-            this.LOCCTR = item.symbol;//we should store the name of the program and starting address somewhere to access for printing the obj file later
-         }
-         else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
-
-           switch (temp.formatN.charAt(0)) {
-            case "1": if(does_mnemonic_exist(item, item.mnemonic)){
-                this.LOCCTR = addHextoHex("1", this.LOCCTR);
-                item.set_address(this.LOCCTR);
-              }
-              break;
-            case "2": if(does_mnemonic_exist(item, item.mnemonic)){
-                this.LOCCTR = addHextoHex("2", this.LOCCTR);
-                item.set_address(this.LOCCTR);
-              }
-              break;
-            case "3": if(does_mnemonic_exist(item, item.mnemonic)){
-                this.LOCCTR = addHextoHex("3", this.LOCCTR);
-                item.set_address(this.LOCCTR);
-              }
-              break;
-            case "+":
-              this.exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
-              this.LOCCTR = addHextoHex("4", this.LOCCTR);
-              item.set_address(this.LOCCTR);
-              //item.set_format4();
-              //this.set_format(4);//format assigned to sourceline.
-            break;
-         }
-       }
-       catch (Exception e) {};
-      }
-      //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
-   }
+      map_addresses()
  }
+ public Source_Line[] map_addresses(){
+   for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
+     try{
+       if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
+         this.LOCCTR = item.symbol;//we should store the name of the program and starting address somewhere to access for printing the obj file later
+      }
+      else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
+        boolean exist;
+        switch (temp.formatN.charAt(0)) {
+         case "1": if(does_mnemonic_exist(item, item.mnemonic)){
+             this.LOCCTR = addHextoHex("1", this.LOCCTR);
+             item.set_address(this.LOCCTR);
+           }
+           break;
+         case "2": if(does_mnemonic_exist(item, item.mnemonic)){
+             this.LOCCTR = addHextoHex("2", this.LOCCTR);
+             item.set_address(this.LOCCTR);
+           }
+           break;
+         case "3": if(does_mnemonic_exist(item, item.mnemonic)){
+             this.LOCCTR = addHextoHex("3", this.LOCCTR);
+             item.set_address(this.LOCCTR);
+           }
+           break;
+         case "+":
+           this.exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
+           this.LOCCTR = addHextoHex("4", this.LOCCTR);
+           item.set_address(this.LOCCTR);
+           //item.set_format4();
+           //this.set_format(4);//format assigned to sourceline.
+         break;
+      }
+    }
+    catch (Exception e) {};
+   }
+   //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
+  }
+  return source_lines;
+}
    // if(this.optable.find(item.mnemonic) != null){//grab temp object
    //   DataItem temp = this.optable.find(item.mnemonic);//local formatNumber string set to formatN of DataItem
    //   String formatNumber = temp.formatN;//if 3/4 need to determine if format 4 was declared
