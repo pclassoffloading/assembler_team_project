@@ -18,6 +18,7 @@ int LOCCTR = 0;
       SYMTAB symtab = new SYMTAB();
       symtab.createSymItem("HAPPY", "1200");
       symtab.createSymItem("HOUR", "4334");
+      symtab.displayTable();
       //PassOne passone = new PassOne(optable, source_lines);//sourcelines
       PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test);
    }

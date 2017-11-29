@@ -12,7 +12,7 @@ class PassOne{
         try{DataItem et = optable.find(operation);
         et.printDataItem();}catch (Exception e) {};
       }
-      //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
+      //System.out.println(operation.getMnumonic());System.out.println(operat3ion.getFormatN());System.out.println(operation.getOpcode());
    }
 }
 //This program simulates Pass 1
@@ -24,7 +24,7 @@ class PassOne{
 //for each sourceline
 //    operation = sourceLine.getMnumonic;
 //if operation is in OPTAB
-// if(OPTAB.find(operation) != Null)
+// if(OPTAB.find(operation) != null)
 //    SYMTAB.createSymItem(sourceline.getLabel, LOCCTR);
 //    SymItem temp = SYMTAB.find(sourceline.getLabel);
 //    addressSpace = temp.getFormatN
