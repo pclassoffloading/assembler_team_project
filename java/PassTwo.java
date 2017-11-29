@@ -102,17 +102,17 @@ class PassTwo{
                         //convert opcode to binary, and "chop off" last two bits
                         String opcodeBinary = mathLib.hexToBin(opcode);
                         
-                        //chopp off
+                        //chop off
                         opcodeBinary = opcodeBinary.substring(0,6);
                         
                         //convert address to binary
-                        //binaryAddress = mathLib.hexToBinary(targetAddress);
+                        String binaryAddress = mathLib.hexToBin(targetAddress);
                         
                         //then we concatanate with n,i,x,b,p,e and adddress
-                        //String binaryObjectCode = opcodeBinary + n + i + x + b + p + e + binaryAddress
+                        String binaryObjectCode = opcodeBinary + n + i + x + b + p + e + binaryAddress;
                         
                         //then convert back to Hex
-                        //objectCode = mathLib.binaryToHex(binaryObjectCode);s
+                        objectCode = mathLib.binToHex(binaryObjectCode);
                         
                         //                Format 4 Instruction
                         //                format of object code is four bytes: ## ## ## ##
