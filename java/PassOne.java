@@ -6,62 +6,73 @@ class PassOne{
    SYMTAB symtab;
    OPTAB optable;
    boolean isFour;
+   String LOCCTR = "0";
    PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
       this.optable = optable;
       this.source_lines = source_lines;
       this.symtab = symtab;
-      String LOCCTR = "0";
 
-      for (Source_line item : source_lines) {
-        //System.out.println(item.mnemonic);
-         String operation = item.mnemonic;
-        //if mnemonic is START then we are at the start of the program and need to set LOCCTR
-            try{
-         if(operation.equals("START")){
-         //Set LOCCTR to starting address
-         //i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
-            LOCCTR = item.symbol;
-         //we should store the name of the program and starting address somewhere to access for printing the obj file later
+      boolean exist
+
+      for (Source_line item : source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
+        try{
+          if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
+            this.LOCCTR = item.symbol;//we should store the name of the program and starting address somewhere to access for printing the obj file later
          }
-         else{
+         else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
 
-               //format is of LABEL MNEMONIC SYMBOL
-               //If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN
-               //i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
-               if(item.mnemonic.charAt(0) == '+'){
-                  //then is format 4 isntruction
-                  //set boolean value stored in source_lines to true
-                  item.set_format4();
-               }
-               if(this.optable.find(item.mnemonic) != null){
+           switch (temp.formatN.charAt(0)) {
+            case "1": if(does_mnemonic_exist(item, item.mnemonic)){
+                this.LOCCTR = addHextoHex("1", this.LOCCTR);
+              }
+              break;
+            case "2": if(does_mnemonic_exist(item, item.mnemonic)){
+                this.LOCCTR = addHextoHex("2", this.LOCCTR);
+              }
+              break;
+            case "3": if(does_mnemonic_exist(item, item.mnemonic)){
+                this.LOCCTR = addHextoHex("3", this.LOCCTR);
+              }
+              break;
+            case "+":
+              this.exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
+              this.LOCCTR = addHextoHex("4", this.LOCCTR);
+              //item.set_format4();
+              //this.set_format(4);//format assigned to sourceline.
+            break;
 
-                  //grab temp object
-                  DataItem temp = this.optable.find(item.mnemonic);
 
-                  //local formatNumber string set to formatN of DataItem
-                  String formatNumber = temp.formatN;
-
-                  //if 3/4 need to determine if format 4 was declared
-                  if((temp.formatN).equals("3/4")){
-
-                  }
-                  temp = find_format(temp, item.mnemonic);
-
-                  temp.printDataItem();
-                  System.out.println("mneumonic: " + temp.mnumonic + " formatN: " + temp.formatN + " format_4: " + temp.isFour);
-                  this.symtab.createSymItem(item.label, LOCCTR);
-               }
-               else{
-               //if the mnemonic was not in OPTAB then we check if is a 'variable declaration' i.e. WORD RESW BYTE
-               }
 
          }
        }
        catch (Exception e) {};
       }
-
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
+   // if(this.optable.find(item.mnemonic) != null){//grab temp object
+   //   DataItem temp = this.optable.find(item.mnemonic);//local formatNumber string set to formatN of DataItem
+   //   String formatNumber = temp.formatN;//if 3/4 need to determine if format 4 was declared
+   //   if((temp.formatN).equals("3/4")){}
+   //   temp = find_format(temp, item.mnemonic);
+   //   temp.printDataItem();
+   //   System.out.println("mneumonic: " + temp.mnumonic + " formatN: " + temp.formatN + " format_4: " + temp.isFour);
+   //   this.symtab.createSymItem(item.label, LOCCTR);
+   // }
+
+
+   public boolean does_mnemonic_exist(Source_line item, String mnemonic){
+    if(this.optable.find(item.mnemonic) != null){//grab temp object
+      return true
+    }
+    else{
+      return false
+       //if the mnemonic was not in OPTAB then we check if is a 'variable declaration' i.e. WORD RESW BYTE
+    }
+  }
+
+
+
+
    //or should it be sourceline? <<<<<<< Yes should be in source_line
    public DataItem find_format(DataItem temp, String mneumonic){
      //temp.formatN, temp.mnumonic

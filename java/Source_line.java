@@ -1,6 +1,7 @@
 
 class Source_line{
    String label, mnemonic, symbol, address, objectCode;
+   int format;
    boolean isFour = false;//default is false
 
    public Source_line(){
@@ -41,7 +42,7 @@ class Source_line{
             break;
       }
    }
-   
+
    public String get_mnemonic(){
       return this.mnemonic;
    }
@@ -54,14 +55,16 @@ class Source_line{
    public String get_address(){
       return this.address;
    }
-   
+
    public void set_objectCode(String objectCode){
       this.objectCode = objectCode;
    }
-   
+
    public void set_format4(){
       this.isFour = true;
    }
-   
+   public void set_format(int format){
+      this.format = format;
+   }
 //addresses(pass1) opcode(pass2)-- output variables
 }
