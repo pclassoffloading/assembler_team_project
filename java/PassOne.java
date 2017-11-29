@@ -18,7 +18,7 @@ class PassOne{
 
           this.symtab.createSymItem(item.label, LOCCTR);
           SymItem temp = this.symtab.find(item.label);
-
+      //    addressSpace = temp.getFormatN;
 
 
         }catch (Exception e) {};
