@@ -43,7 +43,7 @@ class PassTwo{
          
             String operation = sourcelines[i].get_mnemonic();
             
-            if(operation.substring(operation.length()).equals('X')){
+            if(operation.substring(operation.length()-1).equals('X')){
                this.isIndexed = true;
                operation = operation.substring(0, (operation.length()-2));
                this.x = "1";
