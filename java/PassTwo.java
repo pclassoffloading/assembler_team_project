@@ -33,6 +33,8 @@ class PassTwo{
    public void pass2_assembly(Source_line[] sourcelines){
    
       for(int i = 0; i < sourcelines.length; i++){
+
+
          try{
          
             String operation = sourcelines[i].get_mnemonic();
@@ -82,14 +84,29 @@ class PassTwo{
                      //if is four
                      else{
                         e = "1";
-                     //find target address
+                        //find target address
                         String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
-                     
+                        
+                        //convert opcode to binary, and "chop off" last two bits
+                        //String opcodeBinary = mathLib.hexToBinary(opcode);
+                        //opcodeBinary = opcodeBinary.substring(0,6);
+                        
+                        //convert address to binary
+                        //binaryAddress = mathLib.hexToBinary(targetAddress);
+                        
+                        //then we concatanate with n,i,x,b,p,e and adddress
+                        //String binaryObjectCode = opcodeBinary + n + i + x + b + p + e + binaryAddress
+                        
+                        //then convert back to Hex
+                        //objectCode = mathLib.binaryToHex(binaryObjectCode);s
+                        
+                     //                Format 4 Instruction
                      //                format of object code is four bytes: ## ## ## ##
                      //                first six bits is opcode code
                      //                next six bits is nixbpe
                      //                next 20 bits are address
                      //                last four bytes are target address
+                     
                      }//if is four
                   default:
                //                  should not reach here
@@ -115,7 +132,7 @@ class PassTwo{
 //    }
 
    public void determineAddressing(Source_line sourceline){
-      String label = sourceline.get_label();
+      String label = sourceline.get_symbol();
    
       //if immiedate addressing
       try{
@@ -177,7 +194,7 @@ class PassTwo{
          String address_2 = source_line2.get_address();
         
          //get label
-         String label = source_line.get_label();
+         String label = source_line.get_symbol();
             
          //get address of label
          String address = this.symtable.find(label).get_address();
@@ -186,19 +203,19 @@ class PassTwo{
          String displacement = this.mathLib.subHextoHex(address, address_2);
          
          //if displacement is bigger than 2047 or less than -2048
+         BASEMODE(address);
          
       }
       catch (Exception e) {};
-      
-   
-   
-   //if is within range set object code
-   //else go to BASE mode
    
    }//PCMODE
 
    public void BASEMODE(String address){
+   //Switched to Base Mode relative addressing
+   p = "0";
+   b = "1";
    //calculate address - BASE register
+   //if displacement is bigger than 4095 or less than 0, then fail
    }//BASEMODE
 
 }//class Pass 2
