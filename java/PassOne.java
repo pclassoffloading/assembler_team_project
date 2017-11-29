@@ -3,8 +3,10 @@
 class PassOne{
   	//String label, mnemonic, symbol;
   Source_line source_lines[];
-   PassOne(OPTAB optable, Source_line source_lines[]){
+  SYMTAB symtab;
+   PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
       this.source_lines = source_lines;
+      this.symtab = symtab
 
       for (Source_line item : source_lines) {
         System.out.println(item.mnemonic);
