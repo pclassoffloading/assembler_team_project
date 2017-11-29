@@ -11,7 +11,6 @@ class PassOne{
       this.optable = optable;
       this.source_lines = source_lines;
       this.symtab = symtab;
-
       boolean exist
 
       for (Source_line item : source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
@@ -44,15 +43,13 @@ class PassOne{
               //item.set_format4();
               //this.set_format(4);//format assigned to sourceline.
             break;
-
-
-
          }
        }
        catch (Exception e) {};
       }
       //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
    }
+ }
    // if(this.optable.find(item.mnemonic) != null){//grab temp object
    //   DataItem temp = this.optable.find(item.mnemonic);//local formatNumber string set to formatN of DataItem
    //   String formatNumber = temp.formatN;//if 3/4 need to determine if format 4 was declared
