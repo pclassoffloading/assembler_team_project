@@ -13,9 +13,13 @@ class PassOne{
       this.source_lines = source_lines;
       this.symtab = symtab;
 
-      map_addresses()
+      provide_source_lines(construct_map_addresses());
+
  }
- public Source_Line[] map_addresses(){
+ public Source_line[] provide_source_lines(Source_line[] source_lines){
+   return source_lines;
+ }
+ public Source_Line[] construct_map_addresses(){
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
      try{
        if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
