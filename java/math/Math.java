@@ -14,7 +14,7 @@ public class Math {
    public int convertHexToInt(String i){
       //System.out.println(i);
       int n = (int) Long.parseLong(i, 16);
-      System.out.println("Number = " + n);
+      
       return n;
    }
    public String addHextoHex(String val1, String val2){
