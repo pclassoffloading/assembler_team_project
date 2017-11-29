@@ -170,8 +170,8 @@ try{
         String label = item.get_label();
 //System.out.println(label);
         //get address of label
-        System.out.println(label);
-        System.out.println("aeoiehoaisdhoiashdoi");
+        //System.out.println(label);
+        symtable.createSymItem(label, "1200");
         String address = this.symtable.find(label).get_address();
 
         String LOCCTR = this.mathLib.addHextoHex(item.get_address(), this.optable.find(item.get_mnemonic()).getFormatN());
