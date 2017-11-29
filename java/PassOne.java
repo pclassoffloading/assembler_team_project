@@ -4,7 +4,9 @@ class PassOne{
   	//String label, mnemonic, symbol;
   Source_line source_lines[];
   SYMTAB symtab;
+  OPTAB optable;
    PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
+     this.optable = optable;
       this.source_lines = source_lines;
       this.symtab = symtab;
       String LOCCTR = "0";
@@ -14,12 +16,13 @@ class PassOne{
         String operation = item.mnemonic;
         try{
           DataItem et = optable.find(operation);
-          et.printDataItem();
+          //et.printDataItem();
 
           this.symtab.createSymItem(item.label, LOCCTR);
-          SymItem temp = this.symtab.find(item.label);
-      //    addressSpace = temp.getFormatN;
-
+          DataItem temp = this.optable.find(item.mnemonic);
+          String addressSpace = temp.formatN;
+          System.out.println("addressSpace");
+          System.out.println(addressSpace);
 
         }catch (Exception e) {};
       }

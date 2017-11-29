@@ -82,6 +82,13 @@ class OPTAB
       }//for
       return true;
    }//iPrime
-
+   // public void setFormatN(){
+   //   if(charAt[0] == '+'){
+   //    formatN = 4
+   //  }
+   //  else if {
+   //     farmatN = 3
+   //  }
+   //}
 
 }//OPTAB
