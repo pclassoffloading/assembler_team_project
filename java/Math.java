@@ -38,6 +38,7 @@ public class Math {
   static String binToHex(String s) {
     int numInDec = Integer.parseInt(s, 2);
     String hexString = Integer.toHexString(numInDec);
+    return hexString;
   }
 
 }
