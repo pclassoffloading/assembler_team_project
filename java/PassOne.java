@@ -21,6 +21,7 @@ class PassOne{
        if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
          this.LOCCTR = item.symbol;//we should store the name of the program and starting address somewhere to access for printing the obj file later
       }
+      //else if operation is in i.e WORD RESW BYTE RESBYTE
       else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
         boolean exist;
         switch (temp.formatN.charAt(0)) {
