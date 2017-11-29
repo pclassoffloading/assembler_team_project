@@ -100,8 +100,10 @@ class PassTwo{
                            String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
                         
                         //convert opcode to binary, and "chop off" last two bits
-                        //String opcodeBinary = mathLib.hexToBinary(opcode);
-                        //opcodeBinary = opcodeBinary.substring(0,6);
+                        String opcodeBinary = mathLib.hexToBin(opcode);
+                        
+                        //chopp off
+                        opcodeBinary = opcodeBinary.substring(0,6);
                         
                         //convert address to binary
                         //binaryAddress = mathLib.hexToBinary(targetAddress);
