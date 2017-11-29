@@ -24,19 +24,23 @@ class PassOne{
            switch (temp.formatN.charAt(0)) {
             case "1": if(does_mnemonic_exist(item, item.mnemonic)){
                 this.LOCCTR = addHextoHex("1", this.LOCCTR);
+                item.set_address(this.LOCCTR);
               }
               break;
             case "2": if(does_mnemonic_exist(item, item.mnemonic)){
                 this.LOCCTR = addHextoHex("2", this.LOCCTR);
+                item.set_address(this.LOCCTR);
               }
               break;
             case "3": if(does_mnemonic_exist(item, item.mnemonic)){
                 this.LOCCTR = addHextoHex("3", this.LOCCTR);
+                item.set_address(this.LOCCTR);
               }
               break;
             case "+":
               this.exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
               this.LOCCTR = addHextoHex("4", this.LOCCTR);
+              item.set_address(this.LOCCTR);
               //item.set_format4();
               //this.set_format(4);//format assigned to sourceline.
             break;
