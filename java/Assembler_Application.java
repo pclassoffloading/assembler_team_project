@@ -20,7 +20,7 @@ int LOCCTR = 0;
       //symtab.createSymItem("HOUR", "4334");
       //symtab.displayTable();
       PassOne passone = new PassOne(optable, source_lines, symtab);//sourcelines
-      //PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test);
+      PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test);
    }
    public static String loc(String text){
       return "../ext_files/".concat(text);

@@ -95,24 +95,28 @@ class PassTwo{
 
                         //if is four
                         else{
+
                            e = "1";
                            //find target address
                            String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
-
+                           System.out.println(opcode);
                            //convert opcode to binary, and "chop off" last two bits
                            String opcodeBinary = mathLib.hexToBin(opcode);
-
+                           System.out.println(opcodeBinary);
                            //chop off
                            opcodeBinary = opcodeBinary.substring(0,6);
 
                            //convert address to binary
                            String binaryAddress = mathLib.hexToBin(targetAddress);
+                           System.out.println("binaryAddress:" + binaryAddress);
 
                            //then we concatanate with n,i,x,b,p,e and adddress
                            String binaryObjectCode = opcodeBinary + n + i + x + b + p + e + binaryAddress;
+                           System.out.println("binaryObjectCode:" + binaryObjectCode);
 
                            //then convert back to Hex
                            objectCode = mathLib.binToHex(binaryObjectCode);
+                           System.out.println("objectCode:" + objectCode);
                            sourcelines[i].set_objectCode(objectCode);
 
                         //                Format 4 Instruction

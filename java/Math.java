@@ -31,7 +31,8 @@ public class Math {
   }
 
   static String hexToBin(String s) {
-    return new BigInteger(s, 16).toString(2);
+    String testy = new BigInteger(s, 16).toString(2);
+    return testy;
   }
 
   static String binToHex(String s) {
@@ -39,6 +40,7 @@ public class Math {
     //System.out.println("numInDec = " + numInDec);
     String hexString = Integer.toHexString(numInDec);
     //System.out.println("hexString = " + hexString);
+
     return hexString;
   }
 
