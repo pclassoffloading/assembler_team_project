@@ -45,7 +45,7 @@ class NewPassTwo{
             case "3/4"://format 3 or 4
             //determineIfIndexed(sourcelines[i]);
                determineAddressing(sourcelines[i]);
-               if(!(isFour)){//if is three
+               if(!sourcelines[i].isFour){//if is three
                   e = "0";
                   try{PCMODE(sourcelines[i], sourcelines[i+1]);}catch (Exception e) {};
                 }//if is three
@@ -54,7 +54,8 @@ class NewPassTwo{
                 else{
                    e = "1";
                    //find target address
-                   String targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();
+                   String targetAddress = "0";
+                   try{targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();}catch (Exception e) {};
                    System.out.println(opcode);
                    //convert opcode to binary, and "chop off" last two bits
                    String opcodeBinary = mathLib.hexToBin(opcode);
@@ -119,7 +120,7 @@ class NewPassTwo{
        return mneumonic = mneumonic.substring(1);
     }
     else{
-       isFour = false;//this needs to be stored in sourceline
+       sourceline.isFour = false;//this needs to be stored in sourceline
        return mneumonic;
     }
   }

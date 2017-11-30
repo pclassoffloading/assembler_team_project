@@ -12,12 +12,12 @@ int LOCCTR = 0;
       SYMTAB symtab = new SYMTAB();
       PassOne passone = new PassOne(optable, source_lines, symtab, test);//sourcelines
       source_lines = passone.Pass1();
-      PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test);
-      for (Source_line item : source_lines) {
-
-        item.tell_source_line();
-        System.out.printf("   object code App: %s%n",item.objectCode);
-      }
+      NewPassTwo passtwo = new NewPassTwo(optable, symtab, source_lines, test);
+      //PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test);
+      // for (Source_line item : source_lines) {
+      //   item.tell_source_line();
+      //   System.out.printf("   object code App: %s%n",item.objectCode);
+      // }
    }
    public static String loc(String text){
       return "../ext_files/".concat(text);
