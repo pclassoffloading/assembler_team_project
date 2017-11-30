@@ -58,7 +58,6 @@ class PassOne{
   catch (Exception e) {};
   }
    //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
-
   return source_lines;
 }
    // if(this.optable.find(item.mnemonic) != null){//grab temp object
