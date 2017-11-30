@@ -16,7 +16,7 @@ class Source_line{
    public void evaluate_total_line_count(String word, int word_numb, int total_line_count){
    	//System.out.printf("label: %s, mnemonic: %s, symbol: %s %n", word, word_numb, total_line_count);
       switch (total_line_count) {
-         case 1: this.label = word;
+         case 1: this.mnemonic = word;
             break;
          case 2: tot_2_evaluate_word_numb(word, word_numb);
             break;
