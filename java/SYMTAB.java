@@ -29,9 +29,8 @@ class SymItem{
       this.address = address;
    }//constructor SymItem
 
-   public void printSymItem(){
-      System.out.println(label);
-      System.out.println(address);
+   public void printSymItem(int ind_of_hash){
+      System.out.println("label: " + label + " address: " + address + " hash index: " + ind_of_hash);
 
    }//printSymItem
 
@@ -77,7 +76,9 @@ class SYMTAB
       {
          if(SYMARRAY[j] != null && SYMARRAY[j].getKey() != "-1")
          {
-            System.out.print(String.format(row, j, SYMARRAY[j].getKey()));
+            //System.out.print(String.format(row, j, SYMARRAY[j].getKey()));
+            //
+            SYMARRAY[j].printSymItem(j);
             numItems++;
          }
       }
