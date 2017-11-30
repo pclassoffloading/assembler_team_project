@@ -99,7 +99,20 @@ class NewPassTwo{
                   
                    //then convert back to Hex
                      objectCode = mathLib.binToHex(binaryObjectCode);
+                     
+                     
+                     //binToHex chops off leading zeros so we need to bring them back
+                     if(objectCode.length() != 8){
+                        int value =  8 - (objectCode.length() % 8);
+                        System.out.println("Missing #: " + value);
+                        for(int counter = 0; counter < value; counter++)
+                        {
+                           objectCode = "0" + objectCode;
+                        }
+                     }
                      System.out.println("objectCode:" + objectCode);
+                     
+                                          
                      sourcelines[j].set_objectCode(objectCode);
                   
                   //                Format 4 Instruction
