@@ -1,0 +1,27 @@
+.The following program initializes an array of 100 words with the integer 0.
+INIT_ARRAY 	START	100 		.Load the program at loc 100
+		LDA	ZERO 		.A <--(Zero)
+		STA	VALUE2ST	.VALUE2ST
+
+		LDA	ZERO 		.A <--(Zero)
+		STA	INDEX 		.INDEX <--(A)
+		LDX	INDEX		.X <-- (A)
+
+LOOP_START	LDA	VALUE2ST	.A <--(VALUE2ST)
+
+		LDX	INDEX 		.A <-- (INDEX)
+		ADD	THREE 		.A <-- (A) + 3
+		STA	INDEX  		.INDEX <-- (A)
+		COMP	THREEHUNDRED    .(A) : (THREEHUNDRED, THREEHUNDRED+1, THREEHUNDRED+2) and set CC accordingly
+
+		JLT	LOOP_START	.if CC is <, then jump to LOOP_START
+
+VALUE2ST	RESW	1		.Reserve a word and call it VALUE2ST
+INDEX		RESW	1		.Reserve a word and call it INDEX
+ALPHA		RESW	100		.Reserve an array of 100 words and call it SRC_ARRAY
+
+ZERO		WORD	0		.Define a word constant initialized to 0
+ONE		WORD	1		.Define a word constant initialized to 1
+THREE		WORD	3		.Define a word constant initialized to 3
+THREEHUNDRED	WORD	300		.Define a word constant initialized to 300
+		END	INIT_ARRAY	.End of program

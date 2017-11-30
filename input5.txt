@@ -1,0 +1,14 @@
+START 100
+
+LDA   BETA    .load accumulator with BETA .A <-- (BETA)
+ADD   GAMMA   .Add GAMA to the accumulator .A <-- (A) + (GAMMA)
+SUB   ALPHA   .Subtract ALPHA from the accumulator .A <-- (A) - ALPHA
+
+STA   RESULT  .Store the accumulator in RESULT word .RESULT <-- (A)
+
+ALPHA   Word  1       .?what does this mean? .ALPHA = 1
+BETA    Word  2       .?what does this mean? .BETA = 2
+GAMMA   Word  3       .?what does this mean? .GAMMA = 3
+
+RESULT  RESW  1       .RESERVES ONE WORD declare variable
+END
