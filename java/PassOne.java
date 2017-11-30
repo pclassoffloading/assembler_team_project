@@ -42,10 +42,10 @@ class PassOne{
         item.set_address(this.LOCCTR);
         //System.out.println(item.mnemonic);
         //    symTable.createSymItem("HAPPY", "1200");
-        if(item.mnemonic.equals("WORD")){this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);                                                       this.symtab.createSymItem(item.label, this.LOCCTR);}
-        if(item.mnemonic.equals("RESW")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);   this.symtab.createSymItem(item.label, this.LOCCTR);}
-        if(item.mnemonic.equals("BYTE")){byteCondition(item.symbol.charAt(0), item.symbol);                                                         this.symtab.createSymItem(item.label, this.LOCCTR);}
-        if(item.mnemonic.equals("RESB")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);   this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("WORD")){this.symtab.createSymItem(item.label, this.LOCCTR);this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);                                                      } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("RESW")){this.symtab.createSymItem(item.label, this.LOCCTR);this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);  } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("BYTE")){this.symtab.createSymItem(item.label, this.LOCCTR);byteCondition(item.symbol.charAt(0), item.symbol);                                                        } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("RESB")){this.symtab.createSymItem(item.label, this.LOCCTR);this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);  } //this.symtab.createSymItem(item.label, this.LOCCTR);}
 
         boolean exist;
         DataItem temp;
