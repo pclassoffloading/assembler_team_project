@@ -25,6 +25,10 @@ class PassOne{
  public Source_line[] provide_source_lines(Source_line[] source_lines){
    return source_lines;
  }
+ public provide_symtable()
+ {
+   return this.symtab;
+ }
  public Source_line[] construct_map_addresses(){
 
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
@@ -37,10 +41,11 @@ class PassOne{
       else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
         item.set_address(this.LOCCTR);
         //System.out.println(item.mnemonic);
-        if(item.mnemonic.equals("WORD")){this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);}
-        if(item.mnemonic.equals("RESW")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);}
-        if(item.mnemonic.equals("BYTE")){byteCondition(item.symbol.charAt(0), item.symbol);}
-        if(item.mnemonic.equals("RESB")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);}
+        //    symTable.createSymItem("HAPPY", "1200");
+        if(item.mnemonic.equals("WORD")){this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);                                                       this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("RESW")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);   this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("BYTE")){byteCondition(item.symbol.charAt(0), item.symbol);                                                         this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("RESB")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);   this.symtab.createSymItem(item.label, this.LOCCTR);}
 
         boolean exist;
         DataItem temp;
