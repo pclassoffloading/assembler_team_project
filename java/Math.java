@@ -36,6 +36,11 @@ public class Math {
     return formatty;
   }
 
+  public int toInt(String s) {
+    int numInDec = Integer.parseInt(s);
+    return numInDec;
+  }
+
   static String binToHex(String s) {
     int numInDec = Integer.parseInt(s, 2);
     //System.out.println("numInDec = " + numInDec);

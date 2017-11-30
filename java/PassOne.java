@@ -35,9 +35,15 @@ class PassOne{
       //else if operation is in i.e WORD RESW BYTE RESBYTE
       else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
         item.set_address(this.LOCCTR);
+        //System.out.println(item.mnemonic);
+        if(item.mnemonic.equals("WORD")){this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);}
+        if(item.mnemonic.equals("RESW")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);}
+        if(item.mnemonic.equals("BYTE")){byteCondition(item.symbol.charAt(0), item.symbol);}
+        if(item.mnemonic.equals("RESB")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);}
+
         boolean exist;
         DataItem temp;
-                  System.out.println(item.address);
+                  //System.out.println(item.address);
         if(item.mnemonic.charAt(0) == '+'){
           temp = this.optable.find(item.mnemonic);
           this.LOCCTR = mathLib.addHextoHex("4", this.LOCCTR);
@@ -87,8 +93,19 @@ public String check_if_four(String mnemonic){
       //System.out.println("dadnasbndnb");
       return "3";
     }
+
 }
 
+public String byteCondition(char i, String stringy){
+  switch (i)
+  {
+    case 'C':
+    return Integer.toString(stringy.split("\\'")[1].length());
+    case 'X':
+    return "1";
+  }
+  return "N";
+}
 
 // case '+':
 // if(does_mnemonic_exist(item, item.mnemonic)){
