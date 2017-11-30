@@ -1,42 +1,33 @@
-
-
 import java.io.*;
 import java.io.File; //boolean createNewFile() This method atomically creates a new, empty file named by this abstract pathname if and only if a file with this name does not yet exist.
 import java.util.Scanner;
 import java.util.StringTokenizer;
-
 public class input{
-
-File file1; int srcln_count = 0;
-Scanner fileLines;Scanner fileWords;
-
-
-Source_line source_lines[];
+	File file1; int srcln_count = 0;
+	Scanner fileLines;Scanner fileWords;
+	Source_line source_lines[];
 
 	public input(String fileName) throws IOException{
 
 		initialize_vars(fileName);
 		readEachLine(this.fileLines);
-
-//		provide_source_lines();
+		//user will call provide_source_lines();
 	}
+
 	public void readEachLine(Scanner fileInput1)throws IOException{
 		while (fileInput1.hasNext()){
 			readEachWord(fileInput1.nextLine());
 		}
 		fileInput1.close();
 	}
+
 	public void readEachWord(String strLine) throws IOException{
 		this.fileWords = new Scanner(strLine).useDelimiter("\\s+");
 		int total_line_count = count_words(fileWords);
 
 		restart_string_scanner(fileWords, strLine);
-
 		build_sourcelines(fileWords, total_line_count);
 		restart_string_scanner(fileWords, strLine);
-		
-		//show_Notes();
-
 	}
 
 	public void initialize_vars(String fileName)throws IOException{
@@ -45,10 +36,10 @@ Source_line source_lines[];
 		this.source_lines= new Source_line[countFile(fileLines)];
 		restart_file_scanner(fileLines);
 	}
+
 	public void restart_file_scanner(Scanner fileLines)throws IOException{
 		this.fileLines.close(); this.fileLines = new Scanner(file1);
 	}
-
 
 	public int countFile(Scanner fileInput0){
 		int count = 0;
@@ -71,6 +62,7 @@ Source_line source_lines[];
 		}
 		return count;
 	}
+
 	public void restart_string_scanner(Scanner fileWords, String strLine)throws IOException{
 		this.fileWords.close(); this.fileWords = new Scanner(strLine).useDelimiter("\\s+");
 	}
@@ -98,11 +90,6 @@ Source_line source_lines[];
 		//source_lines[srcln_count].tell_source_line();
 		this.srcln_count++;
 		return word_numb;
-	}
-	public void show_Notes(){
-
-		source_lines[srcln_count].show_Notes();
-		this.srcln_count++;
 	}
 
 	public Source_line[] provide_source_lines(){
