@@ -1,4 +1,4 @@
-SUM	START	0
+SUM	START	231
 FIRST	LDX    #0
 		LDA    #0
 		+LDB   #TABLE2
