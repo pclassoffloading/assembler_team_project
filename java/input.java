@@ -10,6 +10,7 @@ public class input{
 File file1; int srcln_count = 0;
 Scanner fileLines;Scanner fileWords;
 
+
 Source_line source_lines[];
 
 	public input(String fileName) throws IOException{
@@ -55,7 +56,7 @@ Source_line source_lines[];
 	}
 
 	public int count_words(Scanner fileWords)throws IOException{
-		int count = 0;
+		int count = -1;
 		while (this.fileWords.hasNext()){
 			String word = this.fileWords.next();
 			//System.out.printf("Line who knows! WORD %d%s\n", count, word);
@@ -68,11 +69,19 @@ Source_line source_lines[];
 	}
 
 	public int build_sourcelines(Scanner s, int total_line_count){
+		boolean flag = false;
+		while(total_line_count >= 3){
+			total_line_count--;
+		}
+		System.out.println(total_line_count);
 		int word_numb = 0;
 		source_lines[srcln_count] = new Source_line();
 		while (this.fileWords.hasNext()){
+
 			String word = this.fileWords.next();
-			//System.out.printf("Line who knows! WORD %d%s\n", word_numb, word);
+			if(word.charAt(0) == '.'){flag = true;}
+			if(flag == true) {source_lines[srcln_count].add_to_Note(word); continue;}
+			System.out.printf("Line who knows! WORD %d%s\n", word_numb, word);
 			source_lines[srcln_count].add_word(total_line_count, word_numb, word);
 
 			//source_lines[srcln_count].tell_source_line();

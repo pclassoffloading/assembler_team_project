@@ -3,8 +3,12 @@ class Source_line{
    String label, mnemonic, symbol, address, objectCode;
    int format;
    boolean isFour = false;//default is false
+   String note;
 
    public Source_line(){
+   }
+   public void add_to_Note(String note){
+     this.note = note;
    }
    public void add_word(int total_line_count, int word_numb, String word){
       evaluate_total_line_count(word, word_numb, total_line_count);
@@ -16,11 +20,11 @@ class Source_line{
    public void evaluate_total_line_count(String word, int word_numb, int total_line_count){
    	//System.out.printf("label: %s, mnemonic: %s, symbol: %s %n", word, word_numb, total_line_count);
       switch (total_line_count) {
-         case 1: this.mnemonic = word;
+         case 0: this.mnemonic = word;
             break;
-         case 2: tot_2_evaluate_word_numb(word, word_numb);
+         case 1: tot_2_evaluate_word_numb(word, word_numb);
             break;
-         case 3: tot_3_evaluate_word_numb(word, word_numb);
+         case 2: tot_3_evaluate_word_numb(word, word_numb);
             break;
       }
    }
