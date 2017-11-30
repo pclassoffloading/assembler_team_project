@@ -50,15 +50,13 @@ class PassOne{
          case '+':
            exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
            this.LOCCTR = mathLib.addHextoHex("4", this.LOCCTR);
-           item.set_address(this.LOCCTR);
-           //item.set_format4();
-           //this.set_format(4);//format assigned to sourceline.
+           item.set_address(this.LOCCTR);//item.set_format4();//this.set_format(4);//format assigned to sourceline.
          break;
+       }
       }
     }
+  catch (Exception e) {};
   }
-    catch (Exception e) {};
-   }
    //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
 
   return source_lines;
