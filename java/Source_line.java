@@ -5,6 +5,14 @@ class Source_line{
    int format;
    boolean isFour = false;//default is false
    String note = "";
+   boolean isIndexed = false;
+
+   String n = "";
+   String i = "";
+   String x = "";
+   String b = "";
+   String p = "";
+   String e = "";
 
    public Source_line(){
    }

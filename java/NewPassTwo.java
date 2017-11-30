@@ -3,7 +3,8 @@
 class NewPassTwo{
 
   OPTAB optable;SYMTAB symtable;Source_line[] sourcelines;Math mathLib;
-  public String n,i,x,b,p,e, opjectCode, objectCode;
+
+  public String objectCode;
   public boolean isFour, isIndexed;
   String B_Register;String displacement;
 
@@ -26,12 +27,16 @@ class NewPassTwo{
     }
   }
   public void pass2_assembly(Source_line[] sourcelines){
-    for(int i = 0; i < sourcelines.length; i++){
-      String mneumonic = sourcelines[i].get_mnemonic();
-      String modif_mneumonic = is_indexed(mneumonic);
-      is_BASE(mneumonic, sourcelines[i]);
 
-      mneumonic = check_format_4(mneumonic, sourcelines[i]);//this needs to be stored in sourceline
+
+
+    for(int j = 0; j < sourcelines.length; j++){
+
+      String mneumonic = sourcelines[j].get_mnemonic();
+      sourcelines[j] = is_indexed(sourcelines[j]);
+      is_BASE(mneumonic, sourcelines[j]);
+
+      mneumonic = check_format_4(mneumonic, sourcelines[j]);//this needs to be stored in sourceline
 
       if(optable.find(mneumonic) != null){//if mneumonic exists in OPTAB (i.e. ADD, STA, etc)
          String opcode = optable.find(mneumonic).getOpcode();//grap opcode
@@ -43,19 +48,19 @@ class NewPassTwo{
             case "2"://format 2
                break;
             case "3/4"://format 3 or 4
-            //determineIfIndexed(sourcelines[i]);
-               determineAddressing(sourcelines[i]);
-               if(!sourcelines[i].isFour){//if is three
-                  e = "0";
-                  try{PCMODE(sourcelines[i], sourcelines[i+1]);}catch (Exception e) {};
+            //determineIfIndexed(sourcelines[j]);
+               determineAddressing(sourcelines[j]);
+               if(!sourcelines[j].isFour){//if is three
+                  sourcelines[j].e = "0";
+                  try{PCMODE(sourcelines[j], sourcelines[j+1]);}catch (Exception exception) {};
                 }//if is three
 
                 //if is four
                 else{
-                   e = "1";
+                   sourcelines[j].e = "1";
                    //find target address
                    String targetAddress = "0";
-                   try{targetAddress = (symtable.find(sourcelines[i].get_symbol())).get_address();}catch (Exception e) {};
+                   try{targetAddress = (symtable.find(sourcelines[j].get_symbol())).get_address();}catch (Exception exception) {};
                    System.out.println(opcode);
                    //convert opcode to binary, and "chop off" last two bits
                    String opcodeBinary = mathLib.hexToBin(opcode);
@@ -70,13 +75,13 @@ class NewPassTwo{
                    System.out.println("binaryAddress:" + binaryAddress);
                    System.out.println("binaryAddress:" + binaryAddress);
                    //then we concatanate with n,i,x,b,p,e and adddress
-                   String binaryObjectCode = opcodeBinary + this.n + this.i + this.x + this.b + this.p + this.e + binaryAddress;
+                   String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e + binaryAddress;
                    System.out.println("binaryObjectCode:" + binaryObjectCode);
 
                    //then convert back to Hex
                    objectCode = mathLib.binToHex(binaryObjectCode);
                    System.out.println("objectCode:" + objectCode);
-                   sourcelines[i].set_objectCode(objectCode);
+                   sourcelines[j].set_objectCode(objectCode);
 
                 //                Format 4 Instruction
                 //                format of object code is four bytes: ## ## ## ##
@@ -92,19 +97,30 @@ class NewPassTwo{
     }//end for each sourceline
   }//end pass2_assembly
 
-  public String is_indexed(String mneumonic){
-    if(mneumonic.substring(mneumonic.length()-1).equals('X')){
-       this.isIndexed = true;
-       this.x = "1";
-       mneumonic = mneumonic.substring(0, (mneumonic.length()-2));
-       return mneumonic;
+  public Source_line is_indexed(Source_line sourceline){
+    sourceline.tell_source_line();
+    System.out.println("reached");
 
+    try{if(sourceline.symbol.substring(sourceline.symbol.length()-2).equals(",X")){
+
+       sourceline.isIndexed = true;
+       sourceline.x = "1";
+       sourceline.symbol = sourceline.symbol.substring(0, (sourceline.symbol.length()-2));
+       return sourceline;
+     }
+     else{
+          sourceline.isIndexed = false;
+          sourceline.x = "0";
+          return sourceline;
+       }//If is BASE command
     }
-    else{
-       this.isIndexed = false;
-       this.x = "0";
-       return mneumonic;
+    catch (Exception error) {
+
+       sourceline.isIndexed = false;
+       sourceline.x = "0";
+       return sourceline;
     }//If is BASE command
+
   }
 
   public void is_BASE(String mneumonic, Source_line sourceline){
@@ -128,7 +144,7 @@ class NewPassTwo{
 
   public void show_optable(DataItem[] OPARRAY)
   {
-    try{for (DataItem item : OPARRAY) {item.printDataItem();}}catch (Exception e) {};
+    try{for (DataItem item : OPARRAY) {item.printDataItem();}}catch (Exception exception) {};
   }
 
   public void determineAddressing(Source_line sourceline){
@@ -136,51 +152,51 @@ class NewPassTwo{
 
      //if immiedate addressing
      try{if(label.charAt(0) == '#'){
-        n = "0";
-        i = "1";
+        sourceline.n = "0";
+        sourceline.i = "1";
 
         //if label does not exist in SYMTAB then it is assumed to be a constant
         if(symtable.find(label.substring(1)) != null){
-           b = "0";
-           p = "1";
+           sourceline.b = "0";
+           sourceline.p = "1";
         }
         else{
-           b = "0";
-           p = "0";
+           sourceline.b = "0";
+           sourceline.p = "0";
            //objectcode = opcode nixbpe hexadecimal value of constant with leading zeros
         }
      }//end immiediate addressing
 
         //check if label is indirect addressing
      else if(label.charAt(0) == '@'){
-        n = "1";
-        i = "0";
+        sourceline.n = "1";
+        sourceline.i = "0";
         //if exists in SYMTAB is a label, else is a constant
         if(symtable.find(label.substring(1)) != null){
-           p = "1";
-           b = "0";
+           sourceline.p = "1";
+           sourceline.b = "0";
         }
         else{
-           p = "0";
-           b = "0";
+           sourceline.p = "0";
+           sourceline.b = "0";
         }
      }//end indirect addressing
 
         //else is simple addressing
      else{
-        n = "1";
-        i = "1";
+        sourceline.n = "1";
+        sourceline.i = "1";
         //if exists in SYMTAB is a label, else is a constant
         if(symtable.find(label) != null){
-           p = "1";
-           b = "0";
+           sourceline.p = "1";
+           sourceline.b = "0";
         }
         else{
-           p = "0";
-           b = "0";
+           sourceline.p = "0";
+           sourceline.b = "0";
         }
 
-     }}catch (Exception e) {};//else simple addressing
+     }}catch (Exception exception) {};//else simple addressing
 
   }//determineAddressing
   //
@@ -203,16 +219,16 @@ class NewPassTwo{
 
      //if displacement is bigger than 2047 or less than -2048
      if(value > 2047 || value < -2048){
-        BASEMODE(address);
+        BASEMODE(address, source_line);
      }
 
 
   }//PCMODE
 
-  public void BASEMODE(String address){
+  public void BASEMODE(String address, Source_line source_line){
   //Switched to Base Mode relative addressing
-     p = "0";
-     b = "1";
+     source_line.p = "0";
+     source_line.b = "1";
 
      //calculate address - BASE register
      this.displacement = mathLib.subHextoHex(address, B_Register);
