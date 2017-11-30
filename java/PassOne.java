@@ -72,7 +72,7 @@ class PassOne{
    // }
 
    public boolean does_mnemonic_exist(Source_line item, String mnemonic){
-    if(this.optable.find(item.mnemonic) != null){//grab temp object
+    if(this.optable.find(mnemonic) != null){//grab temp object
       return true;
     }
     else{
