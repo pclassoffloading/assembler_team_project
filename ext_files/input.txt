@@ -4,7 +4,7 @@ FIRST	  LDX   #0      .note
 		    +LDB  #TABLE2 .note
 		    BASE 	TABLE2  .note
 LOOP	  ADD 	TABLE,X .note
-		    ADD 	TABLE2,X.note
+		    ADD 	TABLE2,X .note
 		    TIX	  COUNT   .note
 		    JLT 	LOOP    .note
 		    +STA 	TOTAL   .note
