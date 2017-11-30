@@ -7,13 +7,35 @@ public class input{
 	Scanner fileLines;Scanner fileWords;
 	Source_line source_lines[];
 
-	public input(String fileName) throws IOException{
+	public input(){
+
+	}
+	public void args_and_run(String arg)throws IOException{
+
+		initialize_vars(loc(arg));
+		readEachLine(this.fileLines);
+	}
+
+	public void prompt_and_run()throws IOException{
+		String fileName = prompt_for_filename();
 
 		initialize_vars(fileName);
 		readEachLine(this.fileLines);
-		//user will call provide_source_lines();
+		//inuser will call provide_source_lines();
 	}
 
+	public String prompt_for_filename(){
+		System.out.println("1) please put your test files in ext_files directory");
+		System.out.println("2) please type your filename in as the first command line argument.");
+		Scanner scanner = new Scanner(System.in);
+		String testyy = loc(scanner.nextLine());
+		System.out.println(testyy);
+		return testyy;
+
+	}
+	public String loc(String text){
+		 return "../ext_files/".concat(text);
+	}
 	public void readEachLine(Scanner fileInput1)throws IOException{
 		while (fileInput1.hasNext()){
 			readEachWord(fileInput1.nextLine());
