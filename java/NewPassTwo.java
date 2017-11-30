@@ -54,17 +54,31 @@ class NewPassTwo{
                   
                   if(!sourcelines[j].isFour){//if is three
                      sourcelines[j].e = "0";
-                     try{PCMODE(sourcelines[j], sourcelines[j+1]);}
-                     catch (Exception exception) {};
+                     if(sourcelines[j].i.equals("1") && sourcelines[j].p.equals("0")){
+                        //find target address
+                        String targetAddress = "0";
+                        //grab symbol
+                        String symbol = sourcelines[j].symbol;
+                           
+                     }
+                     else if(sourcelines[j].p.equals("1")){
+                        try{PCMODE(sourcelines[j], sourcelines[j+1]);}
+                        catch (Exception exception) {};
+                     }
+                     
+                     
                   }//if is three
+                  
+                  
                   
                   //if is four
                   else{
-                  
+                     //defaults for format 4
                      sourcelines[j].b = "0";
                      sourcelines[j].p = "0";
                   
                      sourcelines[j].e = "1";
+                     
                    //find target address
                      String targetAddress = "0";
                    //grab symbol
@@ -104,7 +118,7 @@ class NewPassTwo{
                      //binToHex chops off leading zeros so we need to bring them back
                      if(objectCode.length() != 8){
                         int value =  8 - (objectCode.length() % 8);
-                        System.out.println("Missing #: " + value);
+                        System.out.println("Missing #0: " + value);
                         for(int counter = 0; counter < value; counter++)
                         {
                            objectCode = "0" + objectCode;
@@ -259,6 +273,7 @@ class NewPassTwo{
       if(value > 2047 || value < -2048){
          BASEMODE(address, source_line);
       }
+      
    
    
    }//PCMODE
