@@ -14,14 +14,19 @@ class PassOne{
       this.source_lines = source_lines;
       this.symtab = symtab;
       this.mathLib = test;
+// Pass1();
 
-      provide_source_lines(construct_map_addresses());
 
+ }
+ public Source_line[] Pass1()
+ {
+   return provide_source_lines(construct_map_addresses());
  }
  public Source_line[] provide_source_lines(Source_line[] source_lines){
    return source_lines;
  }
  public Source_line[] construct_map_addresses(){
+
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
      try{
        if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
@@ -29,37 +34,78 @@ class PassOne{
       }
       //else if operation is in i.e WORD RESW BYTE RESBYTE
       else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
+        item.set_address(this.LOCCTR);
         boolean exist;
-        DataItem temp = this.optable.find(item.mnemonic);
+        DataItem temp;
+                  System.out.println(item.address);
+        if(item.mnemonic.charAt(0) == '+'){
+          temp = this.optable.find(item.mnemonic);
+          this.LOCCTR = mathLib.addHextoHex("4", this.LOCCTR);
+
+        }
+        else{
+          temp = this.optable.find(item.mnemonic);
+        }
+        //System.out.println(item.mnemonic);
         switch (temp.formatN.charAt(0)) {
          case '1': if(does_mnemonic_exist(item, item.mnemonic)){
              this.LOCCTR = mathLib.addHextoHex("1", this.LOCCTR);
-             item.set_address(this.LOCCTR);
+             //item.set_address(this.LOCCTR);
+             //System.out.println(item.address);
            }
            break;
          case '2': if(does_mnemonic_exist(item, item.mnemonic)){
              this.LOCCTR = mathLib.addHextoHex("2", this.LOCCTR);
-             item.set_address(this.LOCCTR);
+             //item.set_address(this.LOCCTR);
+             //System.out.println(item.address);
            }
            break;
-         case '3': if(does_mnemonic_exist(item, item.mnemonic)){
-             this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);
-             item.set_address(this.LOCCTR);
-           }
-           break;
-         case '+':
-           exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
-           this.LOCCTR = mathLib.addHextoHex("4", this.LOCCTR);
-           item.set_address(this.LOCCTR);//item.set_format4();//this.set_format(4);//format assigned to sourceline.
-         break;
-       }
+         case '3':
+          this.LOCCTR = mathLib.addHextoHex(check_if_four(item.mnemonic.substring(1)), this.LOCCTR);
+          //item.set_address(this.LOCCTR);
+
+          break;
+         default:
+
+          item.set_address(this.LOCCTR);
+          break;
+        }
       }
-    }
-  catch (Exception e) {};
-  }
+
    //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
+    }catch (Exception e) {};
+  }
   return source_lines;
 }
+public String check_if_four(String mnemonic){
+    if(mnemonic.charAt(0) == '+')
+    {
+      //System.out.println("reauihiux");
+      return "4";
+    }
+    else{
+      //System.out.println("dadnasbndnb");
+      return "3";
+    }
+}
+
+
+// case '+':
+// if(does_mnemonic_exist(item, item.mnemonic)){
+//     this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);
+//     item.set_address(this.LOCCTR);
+//     System.out.println(item.address);
+//
+//
+// System.out.println("reached");
+//   exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
+//   this.LOCCTR = mathLib.addHextoHex("4", this.LOCCTR);
+//   item.set_address(this.LOCCTR);//item.set_format4();//this.set_format(4);//format assigned to sourceline.
+//   System.out.println(item.address);
+// break;
+// }
+
+
    // if(this.optable.find(item.mnemonic) != null){//grab temp object
    //   DataItem temp = this.optable.find(item.mnemonic);//local formatNumber string set to formatN of DataItem
    //   String formatNumber = temp.formatN;//if 3/4 need to determine if format 4 was declared

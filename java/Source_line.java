@@ -1,6 +1,7 @@
 
 class Source_line{
-   String label, mnemonic, symbol, address, objectCode;
+   String label, mnemonic, symbol, objectCode;
+   String address = "";
    int format;
    boolean isFour = false;//default is false
    String note = "";
@@ -18,7 +19,7 @@ class Source_line{
       evaluate_total_line_count(word, word_numb, total_line_count);
    }
    public void tell_source_line(){
-      System.out.printf("label: %s, mnemonic: %s, symbol: %s, note: %s %n",this.label,this.mnemonic,this.symbol, this.note);
+      System.out.printf("address: %s, label: %s, mnemonic: %s, symbol: %s, note: %s,  %n",this.address, this.label,this.mnemonic,this.symbol, this.note);
    }
 
    public void evaluate_total_line_count(String word, int word_numb, int total_line_count){
