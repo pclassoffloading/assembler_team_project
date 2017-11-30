@@ -33,6 +33,10 @@ Source_line source_lines[];
 		restart_string_scanner(fileWords, strLine);
 
 		build_sourcelines(fileWords, total_line_count);
+		restart_string_scanner(fileWords, strLine);
+		
+		//show_Notes();
+
 	}
 
 	public void initialize_vars(String fileName)throws IOException{
@@ -56,9 +60,12 @@ Source_line source_lines[];
 	}
 
 	public int count_words(Scanner fileWords)throws IOException{
+		boolean flag = false;
 		int count = -1;
 		while (this.fileWords.hasNext()){
 			String word = this.fileWords.next();
+			if(word.charAt(0) == '.'){flag = true;}
+			if(flag == true) { continue;}
 			//System.out.printf("Line who knows! WORD %d%s\n", count, word);
 			count++;
 		}
@@ -73,15 +80,14 @@ Source_line source_lines[];
 		while(total_line_count >= 3){
 			total_line_count--;
 		}
-		System.out.println(total_line_count);
+		//System.out.println(total_line_count);
 		int word_numb = 0;
 		source_lines[srcln_count] = new Source_line();
 		while (this.fileWords.hasNext()){
-
 			String word = this.fileWords.next();
 			if(word.charAt(0) == '.'){flag = true;}
-			if(flag == true) {source_lines[srcln_count].add_to_Note(word); continue;}
-			System.out.printf("Line who knows! WORD %d%s\n", word_numb, word);
+			if(flag == true) {source_lines[srcln_count].add_To_Note(word); continue;}
+			//System.out.printf("Line who knows! WORD %d%s\n", word_numb, word);
 			source_lines[srcln_count].add_word(total_line_count, word_numb, word);
 
 			//source_lines[srcln_count].tell_source_line();
@@ -93,6 +99,12 @@ Source_line source_lines[];
 		this.srcln_count++;
 		return word_numb;
 	}
+	public void show_Notes(){
+
+		source_lines[srcln_count].show_Notes();
+		this.srcln_count++;
+	}
+
 	public Source_line[] provide_source_lines(){
 		return this.source_lines;
 	}

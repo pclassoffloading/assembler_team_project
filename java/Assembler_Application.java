@@ -7,7 +7,7 @@ int LOCCTR = 0;
    public static void main(String [] args) throws IOException{
       System.out.println("on to the first file.");
 
-      input textfile = new input(loc("input.txt"));
+      input textfile = new input(loc("input3.txt"));
       Math test = new Math();
       Source_line source_lines[] = textfile.provide_source_lines();
        for (Source_line item : source_lines) {

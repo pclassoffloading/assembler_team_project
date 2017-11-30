@@ -3,18 +3,22 @@ class Source_line{
    String label, mnemonic, symbol, address, objectCode;
    int format;
    boolean isFour = false;//default is false
-   String note;
+   String note = "";
 
    public Source_line(){
    }
-   public void add_to_Note(String note){
-     this.note = note;
+   public void add_To_Note(String note){
+     this.note = this.note + " " + note;
+   }
+   public void show_Notes()
+   {
+     System.out.println(this.note);
    }
    public void add_word(int total_line_count, int word_numb, String word){
       evaluate_total_line_count(word, word_numb, total_line_count);
    }
    public void tell_source_line(){
-      System.out.printf("label: %s, mnemonic: %s, symbol: %s %n",label,mnemonic,symbol);
+      System.out.printf("label: %s, mnemonic: %s, symbol: %s, note: %s %n",this.label,this.mnemonic,this.symbol, this.note);
    }
 
    public void evaluate_total_line_count(String word, int word_numb, int total_line_count){
