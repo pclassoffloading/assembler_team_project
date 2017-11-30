@@ -51,6 +51,7 @@ class NewPassTwo{
                case "3/4"://format 3 or 4
                //determineIfIndexed(sourcelines[j]);
                   determineAddressing(sourcelines[j]);
+                  
                   if(!sourcelines[j].isFour){//if is three
                      sourcelines[j].e = "0";
                      try{PCMODE(sourcelines[j], sourcelines[j+1]);}
@@ -59,15 +60,19 @@ class NewPassTwo{
                   
                   //if is four
                   else{
+                  
+                     sourcelines[j].b = "0";
+                     sourcelines[j].p = "0";
+                  
                      sourcelines[j].e = "1";
                    //find target address
                      String targetAddress = "0";
                    //grab symbol
-                   String symbol = sourcelines[j].symbol;
+                     String symbol = sourcelines[j].symbol;
                    //check for leading bit of # or @
-                   if(symbol.charAt(0) == '@' || symbol.charAt(0) == '#'){
-                     symbol = symbol.substring(1);
-                   }
+                     if(symbol.charAt(0) == '@' || symbol.charAt(0) == '#'){
+                        symbol = symbol.substring(1);
+                     }
                    
                      try{targetAddress = (symtable.find(symbol)).get_address();}
                      catch (Exception exception) {};
@@ -83,11 +88,12 @@ class NewPassTwo{
                      System.out.println("Binary opcode: " + opcodeBinary);
                   
                    //convert address to binary
-                     String binaryAddress = mathLib.hexToBin(targetAddress);
+                     String binaryAddress = mathLib.hexToBin_Addr(targetAddress);
                   
                      System.out.println("binaryAddress:" + binaryAddress);
                    
                    //then we concatanate with n,i,x,b,p,e and adddress
+                     System.out.println("n "+sourcelines[j].n + " i "+sourcelines[j].i + " x "+sourcelines[j].x + " b "+sourcelines[j].b + " p "+sourcelines[j].p + " e "+sourcelines[j].e);
                      String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e + binaryAddress;
                      System.out.println("binaryObjectCode:" + binaryObjectCode);
                   
@@ -164,7 +170,7 @@ class NewPassTwo{
    }
 
    public void determineAddressing(Source_line sourceline){
-      String label = sourceline.label;
+      String label = sourceline.symbol;
    
      //if immiedate addressing
       try{
@@ -182,6 +188,7 @@ class NewPassTwo{
                sourceline.p = "0";
             //objectcode = opcode nixbpe hexadecimal value of constant with leading zeros
             }
+            
          }//end immiediate addressing
          
          //check if label is indirect addressing
