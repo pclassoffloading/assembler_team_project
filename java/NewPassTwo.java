@@ -16,9 +16,10 @@ class NewPassTwo{
   }
   public void print_values()
   {
-    show_optable(optable.OPARRAY);
+    //show_optable(optable.OPARRAY);
+    //optable.displayTable();
     show_sourcelines(sourcelines);
-    symtable.displayTable();//print_optable;
+    symtable.displayTable();//symtable;
   }
   public void show_sourcelines(Source_line[] source_lines){
     for (Source_line item : source_lines) {
@@ -99,11 +100,11 @@ class NewPassTwo{
 
   public Source_line is_indexed(Source_line sourceline){
     sourceline.tell_source_line();
-    System.out.println("reached");
 
     try{if(sourceline.symbol.substring(sourceline.symbol.length()-2).equals(",X")){
 
        sourceline.isIndexed = true;
+       System.out.println(sourceline.symbol + " is indexed!");
        sourceline.x = "1";
        sourceline.symbol = sourceline.symbol.substring(0, (sourceline.symbol.length()-2));
        return sourceline;

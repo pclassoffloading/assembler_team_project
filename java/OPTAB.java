@@ -65,6 +65,27 @@ class OPTAB
       }//while
       return null; //couldn't find it
    }//find
+   
+      public void displayTable()
+   {
+      String header = "Index  String\n";
+      String row = "%-7d%-20s\n";
+      float probeSum = 0;
+      int numItems = 0;
+
+      System.out.println("\nSYMTAB");
+      System.out.print(header);
+      for(int j=0; j < this.arraySize; j++)
+      {
+         if(OPARRAY[j] != null && OPARRAY[j].getKey() != "-1")
+         {
+            //System.out.print(String.format(row, j, SYMARRAY[j].getKey()));
+            //
+            OPARRAY[j].printDataItem();
+            numItems++;
+         }
+      }
+   }//displayTable
 
    public static int getPrime(int min){
       for(int j = min+1; true; j++)
