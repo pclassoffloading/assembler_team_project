@@ -7,11 +7,13 @@ class PassOne{
    OPTAB optable;
    boolean isFour;
    String LOCCTR = "0";
+   Math mathLib;
 
-   PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab){
+   PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab, Math test){
       this.optable = optable;
       this.source_lines = source_lines;
       this.symtab = symtab;
+      this.mathLib = test;
 
       provide_source_lines(construct_map_addresses());
 
@@ -19,7 +21,7 @@ class PassOne{
  public Source_line[] provide_source_lines(Source_line[] source_lines){
    return source_lines;
  }
- public Source_Line[] construct_map_addresses(){
+ public Source_line[] construct_map_addresses(){
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
      try{
        if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
@@ -28,35 +30,37 @@ class PassOne{
       //else if operation is in i.e WORD RESW BYTE RESBYTE
       else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
         boolean exist;
+        DataItem temp = this.optable.find(item.mnemonic);
         switch (temp.formatN.charAt(0)) {
-         case "1": if(does_mnemonic_exist(item, item.mnemonic)){
-             this.LOCCTR = addHextoHex("1", this.LOCCTR);
+         case '1': if(does_mnemonic_exist(item, item.mnemonic)){
+             this.LOCCTR = mathLib.addHextoHex("1", this.LOCCTR);
              item.set_address(this.LOCCTR);
            }
            break;
-         case "2": if(does_mnemonic_exist(item, item.mnemonic)){
-             this.LOCCTR = addHextoHex("2", this.LOCCTR);
+         case '2': if(does_mnemonic_exist(item, item.mnemonic)){
+             this.LOCCTR = mathLib.addHextoHex("2", this.LOCCTR);
              item.set_address(this.LOCCTR);
            }
            break;
-         case "3": if(does_mnemonic_exist(item, item.mnemonic)){
-             this.LOCCTR = addHextoHex("3", this.LOCCTR);
+         case '3': if(does_mnemonic_exist(item, item.mnemonic)){
+             this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);
              item.set_address(this.LOCCTR);
            }
            break;
-         case "+":
-           this.exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
-           this.LOCCTR = addHextoHex("4", this.LOCCTR);
+         case '+':
+           exist = does_mnemonic_exist(item, item.mnemonic.substring(1));
+           this.LOCCTR = mathLib.addHextoHex("4", this.LOCCTR);
            item.set_address(this.LOCCTR);
            //item.set_format4();
            //this.set_format(4);//format assigned to sourceline.
          break;
       }
     }
+  }
     catch (Exception e) {};
    }
    //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
-  }
+
   return source_lines;
 }
    // if(this.optable.find(item.mnemonic) != null){//grab temp object
@@ -71,10 +75,10 @@ class PassOne{
 
    public boolean does_mnemonic_exist(Source_line item, String mnemonic){
     if(this.optable.find(item.mnemonic) != null){//grab temp object
-      return true
+      return true;
     }
     else{
-      return false
+      return false;
        //if the mnemonic was not in OPTAB then we check if is a 'variable declaration' i.e. WORD RESW BYTE
     }
   }
