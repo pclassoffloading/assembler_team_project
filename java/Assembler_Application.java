@@ -12,7 +12,7 @@ int LOCCTR = 0;
       SYMTAB symtab = new SYMTAB();
       PassOne passone = new PassOne(optable, source_lines, symtab, test);//sourcelines
       source_lines = passone.Pass1();
-      symtab = passone.provide_symtable()
+      symtab = passone.provide_symtable();
 
       NewPassTwo passtwo = new NewPassTwo(optable, symtab, source_lines, test);
       //PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test);

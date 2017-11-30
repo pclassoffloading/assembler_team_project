@@ -25,7 +25,7 @@ class PassOne{
  public Source_line[] provide_source_lines(Source_line[] source_lines){
    return source_lines;
  }
- public provide_symtable()
+ public SYMTAB provide_symtable()
  {
    return this.symtab;
  }
