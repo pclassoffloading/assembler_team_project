@@ -1,6 +1,6 @@
 class OPTAB
 {
-   private DataItem[] OPARRAY;
+   DataItem[] OPARRAY;
    private int arraySize;
    private DataItem nonItem;
 
