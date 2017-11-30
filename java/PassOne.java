@@ -29,8 +29,9 @@ class PassOne{
 
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
      try{
-       if(item.mnemonic == "START"){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
+       if(item.mnemonic.equals("START")){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
          this.LOCCTR = item.symbol;//we should store the name of the program and starting address somewhere to access for printing the obj file later
+         item.set_address(this.LOCCTR);
       }
       //else if operation is in i.e WORD RESW BYTE RESBYTE
       else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
