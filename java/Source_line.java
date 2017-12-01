@@ -29,6 +29,9 @@ class Source_line{
    public void tell_source_line(){
       System.out.printf("address: %s, label: %s, mnemonic: %s, symbol: %s, note: %s,  %n",this.address, this.label,this.mnemonic,this.symbol, this.note);
    }
+   public void tell_lst_file(){
+      System.out.printf("%8s %8s %8s %8s %8s %8s %n",this.address, this.objectCode, this.label,this.mnemonic,this.symbol, this.note);
+   }
 
    public void evaluate_total_line_count(String word, int word_numb, int total_line_count){
    	//System.out.printf("label: %s, mnemonic: %s, symbol: %s %n", word, word_numb, total_line_count);
