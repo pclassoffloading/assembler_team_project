@@ -33,6 +33,7 @@ class PassOne{
 
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
      try{
+      if(item.label != null){this.symtab.createSymItem(item.label, this.LOCCTR);};
        if(item.mnemonic.equals("START")){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
          this.LOCCTR = item.symbol;//we should store the name of the program and starting address somewhere to access for printing the obj file later
          item.set_address(this.LOCCTR);
@@ -42,10 +43,10 @@ class PassOne{
         item.set_address(this.LOCCTR);
         //System.out.println(item.mnemonic);
         //    symTable.createSymItem("HAPPY", "1200");
-        if(item.mnemonic.equals("WORD")){this.symtab.createSymItem(item.label, this.LOCCTR);this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);                                                      } //this.symtab.createSymItem(item.label, this.LOCCTR);}
-        if(item.mnemonic.equals("RESW")){this.symtab.createSymItem(item.label, this.LOCCTR);this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);  } //this.symtab.createSymItem(item.label, this.LOCCTR);}
-        if(item.mnemonic.equals("BYTE")){this.symtab.createSymItem(item.label, this.LOCCTR);byteCondition(item.symbol.charAt(0), item.symbol);                                                        } //this.symtab.createSymItem(item.label, this.LOCCTR);}
-        if(item.mnemonic.equals("RESB")){this.symtab.createSymItem(item.label, this.LOCCTR);this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);  } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("WORD")){this.LOCCTR = mathLib.addHextoHex("3", this.LOCCTR);                                                      } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("RESW")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 3), this.LOCCTR);  } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("BYTE")){byteCondition(item.symbol.charAt(0), item.symbol);                                                        } //this.symtab.createSymItem(item.label, this.LOCCTR);}
+        if(item.mnemonic.equals("RESB")){this.LOCCTR = mathLib.addHextoHex(mathLib.convertIntToHex(mathLib.toInt(item.symbol) * 1), this.LOCCTR);  } //this.symtab.createSymItem(item.label, this.LOCCTR);}
 
         boolean exist;
         DataItem temp;
@@ -83,6 +84,7 @@ class PassOne{
           break;
         }
       }
+
 
    //System.out.println(operation.getMnumonic());System.out.println(operation.getFormatN());System.out.println(operation.getOpcode());
     }catch (Exception e) {};
