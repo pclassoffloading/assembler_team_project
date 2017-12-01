@@ -44,7 +44,7 @@ class NewPassTwo{
             String format = optable.find(mneumonic).getFormatN();//get format
             switch(format){
                case "1"://format 1
-                  objectCode = opcode;
+                  //objectCode = opcode;
                   break;
                case "2"://format 2
                   break;
@@ -53,18 +53,53 @@ class NewPassTwo{
                   determineAddressing(sourcelines[j]);
                   
                   if(!sourcelines[j].isFour){//if is three
+                  
                      sourcelines[j].e = "0";
-                     if(sourcelines[j].i.equals("1") && sourcelines[j].p.equals("0")){
-                        //find target address
-                        String targetAddress = "0";
-                        //grab symbol
-                        String symbol = sourcelines[j].symbol;
+                     
+                     //convert opcode to binary, and "chop off" last two bits
+                     String opcodeBinary = mathLib.hexToBin(opcode);
+                     
+                     //chop off
+                     opcodeBinary = opcodeBinary.substring(0,6);
+                    
+                    
+                     //simple addressing
+                     if(sourcelines[j].n.equals("1") && sourcelines[j].i.equals("1")){
+                      
+                        //op c
+                        if(sourcelines[j].b.equals("0") && sourcelines[j].p.equals("0")){
+                         //   //TA is symbol itself
+//                            String symbol = sourcelines[j].symbol;
+//                            //convert to binary
+//                            System.out.println("Symbol: " + symbol);
+//                            String binarySym = mathLib.hexToBin(symbol);
+//                            //displacement must be 12 bits long
+//                            if(binarySym.length() != 12){
+//                               int value = 12 - (binarySym.length() % 12);
+//                               for(int counter = 0; counter < value; counter++){
+//                                  binarySym = "0" + binarySym;
+//                               }
+//                            }
+//                           calculateObjectCode(sourcelines[j], opcodeBinary, binarySym);
+//                           
+                        
+                        }
+                        //op m
+                        else if(sourcelines[j].b.equals("1") && sourcelines[j].p.equals("1")){
+                           try{PCMODE(sourcelines[j], sourcelines[j+1]);}
+                           catch (Exception exception) {};
                            
+                           String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e;
+                           //
+                        }
                      }
-                     else if(sourcelines[j].p.equals("1")){
-                        try{PCMODE(sourcelines[j], sourcelines[j+1]);}
-                        catch (Exception exception) {};
+                     //indirect addressing
+                     else if(sourcelines[j].n.equals("1") && sourcelines[j].i.equals("0")){
                      }
+                     else if(sourcelines[j].n.equals("0") && sourcelines[j].i.equals("1")){
+                        
+                     }
+                     
                      
                      
                   }//if is three
@@ -106,12 +141,12 @@ class NewPassTwo{
                   
                      System.out.println("binaryAddress:" + binaryAddress);
                    
-                   //then we concatanate with n,i,x,b,p,e and adddress
+                     //then we concatanate with n,i,x,b,p,e and adddress
                      System.out.println("n "+sourcelines[j].n + " i "+sourcelines[j].i + " x "+sourcelines[j].x + " b "+sourcelines[j].b + " p "+sourcelines[j].p + " e "+sourcelines[j].e);
                      String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e + binaryAddress;
                      System.out.println("binaryObjectCode:" + binaryObjectCode);
                   
-                   //then convert back to Hex
+                     //then convert back to Hex
                      objectCode = mathLib.binToHex(binaryObjectCode);
                      
                      
@@ -142,6 +177,24 @@ class NewPassTwo{
          }//if_opcode exists
       }//end for each sourceline
    }//end pass2_assembly
+   
+   public void calculateObjectCode(Source_line sourceline, String opcodeBinary, String displacement){
+      //calulate objectCode
+      String binaryObjectCode = opcodeBinary + sourceline.n + sourceline.i + sourceline.x + sourceline.b + sourceline.p + sourceline.e + displacement;
+      this.objectCode = mathLib.binToHex(binaryObjectCode);
+                           
+      //binToHex cuts off leading 0's so make sure is 6 bytes long
+      if(objectCode.length() != 6){
+         int value =  6 - (objectCode.length() % 6);
+         System.out.println("Missing #0: " + value);
+         for(int counter = 0; counter < value; counter++)
+         {
+            this.objectCode = "0" + this.objectCode;
+         }
+      }
+      
+      sourceline.set_objectCode(this.objectCode);
+   }
 
    public Source_line is_indexed(Source_line sourceline){
       sourceline.tell_source_line();
