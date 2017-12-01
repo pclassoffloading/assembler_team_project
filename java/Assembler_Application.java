@@ -1,3 +1,10 @@
+// Team Sweet & Sour
+// Camron Conway
+// Michael Dimmitt
+// Samantha Maletta
+// Michael Vasquez
+
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
