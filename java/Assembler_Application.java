@@ -11,7 +11,7 @@ int LOCCTR = 0;
     }
 
        for(int i=0;i< args.length;i++){
-
+         output writefile = new output();
           input textfile = new input();
           try{
           textfile.args_and_run(args[i]);
