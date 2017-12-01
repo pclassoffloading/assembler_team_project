@@ -35,9 +35,9 @@ class Source_line{
    public void tell_lst_file(String filename){
 
       String line_numb = "--"+Integer.toString(this.sourceline_number);
-      System.out.println("testing: " + fomat(this.note));
-      System.out.printf(" %s %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note));
-      writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note)));
+
+      System.out.printf(" %s %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), this.note);
+      writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), this.note));
    }
    public String fomat(String format_this){
       try{

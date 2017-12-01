@@ -48,14 +48,16 @@ class NewPassTwo{
      this.writefile.write_file(this.fileName,".lst","      ---   -----------   -----------\n");
    }
    public void pass2_assembly(Source_line[] sourcelines){
-
-
-
       for(int j = 0; j < sourcelines.length; j++){
 
          String mneumonic = sourcelines[j].get_mnemonic();
          sourcelines[j] = is_indexed(sourcelines[j]);
-         is_BASE(mneumonic, sourcelines[j]);
+         if(mneumonic == null){continue;}
+          else{
+            if(mneumonic.equals("BASE")){//set B register
+              this.B_Register = sourcelines[j].get_address();
+            }
+          }
 
          mneumonic = check_format_4(mneumonic, sourcelines[j]);//this needs to be stored in sourceline
 
@@ -270,11 +272,9 @@ class NewPassTwo{
 
    }
 
-   public void is_BASE(String mneumonic, Source_line sourceline){
-      if(mneumonic.equals("BASE")){//set B register
-         this.B_Register = sourceline.get_address();
-      }
-   }
+
+
+
 
    public String check_format_4(String mneumonic, Source_line sourceline){
       if(mneumonic.charAt(0) == '+')

@@ -12,14 +12,35 @@ class printObjFile{
       this.fileName = fileName;
 
       //header file
+      sourcelines = getHealthyHeader(sourcelines);
+      System.out.println("aksjbdoasbd");
+      sourcelines[0].tell_source_line();
       printHeader(sourcelines);
       printTextRecords(sourcelines);
       printModificationRecords(sourcelines);
       printEndRecord(sourcelines);
 
    }
+   public Source_line[] getHealthyHeader(Source_line[] sourcelines){
+     int c = 0;
+     while(sourcelines[c].label == null && sourcelines[c].mnemonic == null && sourcelines[c].symbol == null){
+       c++;
+     }// System.out.println(sourcelines[c].mnemonic);// System.out.println(c);
+     if(c > 0){
+       Source_line[] convert = new Source_line[sourcelines.length-c];
+
+       for(int z = c-1; z < convert.length; z++){
+          convert[z] = sourcelines[z+1];
+       }
+       return convert;
+     }
+     else{
+       return sourcelines;
+     }
+   }
 
    public void printHeader(Source_line[] sourcelines){
+
       System.out.format("%c%-6s%-6s%-6s\n", 'H', sourcelines[0].label, padString(sourcelines[0].get_address()), padString(sourcelines[sourcelines.length-1].get_address()));
       this.writefile.write_file(this.fileName, ".obj", String.format("%c%-6s%-6s%-6s\n", 'H', sourcelines[0].label, padString(sourcelines[0].get_address()), padString(sourcelines[sourcelines.length-1].get_address())));
       //System.out.println("H" + sourcelines[0].label + sourcelines[0].get_address() + sourcelines[sourcelines.length-1].get_address());
