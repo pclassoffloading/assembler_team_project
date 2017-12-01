@@ -1,12 +1,12 @@
 import java.io.*;
-class printObjFile{
+class PrintObjFile{
 //writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note)));
 //this.writefile.write_file(this.fileName,".lst","----------------\n");
    Math mathLib;
    Output writefile;
    String fileName;
 
-   public printObjFile(Source_line[] sourcelines, Math test,String fileName){
+   public PrintObjFile(Source_line[] sourcelines, Math test,String fileName){
       this.mathLib = test;
       this.writefile = new Output();
       this.fileName = fileName;
