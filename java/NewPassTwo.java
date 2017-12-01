@@ -49,7 +49,7 @@ class NewPassTwo{
                case "2"://format 2
                   break;
                case "3/4"://format 3 or 4
-               //determineIfIndexed(sourcelines[j]);
+               
                   determineAddressing(sourcelines[j]);
                   
                   if(!sourcelines[j].isFour){//if is three
@@ -68,35 +68,50 @@ class NewPassTwo{
                       
                         //op c
                         if(sourcelines[j].b.equals("0") && sourcelines[j].p.equals("0")){
-                         //   //TA is symbol itself
-//                            String symbol = sourcelines[j].symbol;
-//                            //convert to binary
-//                            System.out.println("Symbol: " + symbol);
-//                            String binarySym = mathLib.hexToBin(symbol);
-//                            //displacement must be 12 bits long
-//                            if(binarySym.length() != 12){
-//                               int value = 12 - (binarySym.length() % 12);
-//                               for(int counter = 0; counter < value; counter++){
-//                                  binarySym = "0" + binarySym;
-//                               }
-//                            }
-//                           calculateObjectCode(sourcelines[j], opcodeBinary, binarySym);
-//                           
+                           //TA is symbol itself
+                           String symbol = sourcelines[j].symbol;
+                           //convert to binary
+                           String binarySym = mathLib.hexToBin(symbol);
+                           //displacement must be 12 bits long
+                           if(binarySym.length() != 12){
+                              int value = 12 - (binarySym.length() % 12);
+                              for(int counter = 0; counter < value; counter++){
+                                 binarySym = "0" + binarySym;
+                              }
+                           }
+                           calculateObjectCode(sourcelines[j], opcodeBinary, binarySym);
+                          
                         
                         }
                         //op m
-                        else if(sourcelines[j].b.equals("1") && sourcelines[j].p.equals("1")){
+                        else if(sourcelines[j].b.equals("0") && sourcelines[j].p.equals("1")){
                            try{PCMODE(sourcelines[j], sourcelines[j+1]);}
                            catch (Exception exception) {};
                            
-                           String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e;
-                           //
+                           //String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e;
+                           String binDisplacement = mathLib.hexToBin12(displacement);
+                           calculateObjectCode(sourcelines[j], opcodeBinary, binDisplacement);
                         }
                      }
                      //indirect addressing
                      else if(sourcelines[j].n.equals("1") && sourcelines[j].i.equals("0")){
                      }
                      else if(sourcelines[j].n.equals("0") && sourcelines[j].i.equals("1")){
+                     
+                        String symbol = sourcelines[j].symbol;
+                        //remove the #
+                        symbol = symbol.substring(1);
+                        
+                        //constant i.e. #0 #100 etc
+                        if(sourcelines[j].p.equals("0") && sourcelines[j].b.equals("0")){
+                        
+                        String binSymbol = mathLib.hexToBin12(symbol);
+                        
+                        //calculate ObjectCode
+                        calculateObjectCode(sourcelines[j], opcodeBinary, binSymbol);
+                        
+                        
+                        }
                         
                      }
                      
@@ -126,34 +141,26 @@ class NewPassTwo{
                      try{targetAddress = (symtable.find(symbol)).get_address();}
                      catch (Exception exception) {};
                      
-                     System.out.println("TA: "+targetAddress);
-                     
-                     System.out.println("opcode: "+opcode);
                    //convert opcode to binary, and "chop off" last two bits
                      String opcodeBinary = mathLib.hexToBin(opcode);
-                     System.out.println("opcode binary: "+opcodeBinary);
+                     
                    //chop off
                      opcodeBinary = opcodeBinary.substring(0,6);
-                     System.out.println("Binary opcode: " + opcodeBinary);
-                  
+                    
                    //convert address to binary
                      String binaryAddress = mathLib.hexToBin_Addr(targetAddress);
                   
-                     System.out.println("binaryAddress:" + binaryAddress);
-                   
                      //then we concatanate with n,i,x,b,p,e and adddress
                      System.out.println("n "+sourcelines[j].n + " i "+sourcelines[j].i + " x "+sourcelines[j].x + " b "+sourcelines[j].b + " p "+sourcelines[j].p + " e "+sourcelines[j].e);
                      String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e + binaryAddress;
-                     System.out.println("binaryObjectCode:" + binaryObjectCode);
                   
                      //then convert back to Hex
                      objectCode = mathLib.binToHex(binaryObjectCode);
                      
-                     
                      //binToHex chops off leading zeros so we need to bring them back
                      if(objectCode.length() != 8){
                         int value =  8 - (objectCode.length() % 8);
-                        System.out.println("Missing #0: " + value);
+                       
                         for(int counter = 0; counter < value; counter++)
                         {
                            objectCode = "0" + objectCode;
@@ -180,6 +187,7 @@ class NewPassTwo{
    
    public void calculateObjectCode(Source_line sourceline, String opcodeBinary, String displacement){
       //calulate objectCode
+      
       String binaryObjectCode = opcodeBinary + sourceline.n + sourceline.i + sourceline.x + sourceline.b + sourceline.p + sourceline.e + displacement;
       this.objectCode = mathLib.binToHex(binaryObjectCode);
                            
@@ -193,6 +201,7 @@ class NewPassTwo{
          }
       }
       
+      System.out.println(objectCode);
       sourceline.set_objectCode(this.objectCode);
    }
 
@@ -313,9 +322,11 @@ class NewPassTwo{
    
      //get label
       String label = source_line.get_symbol();
+      System.out.println("label: "+label);
    
      //get address of label
       String address = this.symtable.find(label).get_address();
+      
    
      //calculate displacement
       this.displacement = this.mathLib.subHextoHex(address, address_2);

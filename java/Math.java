@@ -36,6 +36,12 @@ public class Math {
       return formatty;
    }
    
+   static String hexToBin12(String s){
+      String testy = new BigInteger(s, 16).toString(2);
+      String formatty = ("000000000000" + testy).substring(testy.length());
+      return formatty;
+   }
+   
    static String hexToBin_Addr(String s) {
       String testy = new BigInteger(s, 16).toString(2);
       String formatty = ("00000000000000000000" + testy).substring(testy.length());
