@@ -34,6 +34,7 @@ int LOCCTR = 0;
 
           PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test, args[i]);
           PrintObjFile printObjFile = new PrintObjFile(source_lines, test, args[i]);
+          System.out.println("Check files: "+modify_filename(args[i],".lst")+" and "+modify_filename(args[i],".obj")+"!!");
         }catch(FileNotFoundException exception){
           System.out.println();
           System.out.println("whoa, incorrect file name given.");

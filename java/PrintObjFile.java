@@ -13,7 +13,6 @@ class PrintObjFile{
 
       //header file
       sourcelines = getHealthyHeader(sourcelines);
-      System.out.println("aksjbdoasbd");
       sourcelines[0].tell_source_line();
       printHeader(sourcelines);
       printTextRecords(sourcelines);
