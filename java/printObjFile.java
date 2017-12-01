@@ -55,7 +55,7 @@ class printObjFile{
    }
    
    public void printEndRecord(Source_line[] sourcelines){
-   System.out.println("E" + padString(sourcelines[0].get_address()));
+      System.out.println("E" + padString(sourcelines[0].get_address()));
    }
    
    public String padString(String s){
