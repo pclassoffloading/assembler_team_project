@@ -7,11 +7,9 @@ public class Output{
 	}
   public void write_file(String filename, String type, String message){
     if(type.equals(".lst")){
-      System.out.println(type);
       filename = modify_filename(filename, type);
     }
     else if(type.equals(".obj")){
-      System.out.println(type);
       filename = modify_filename(filename, type);
     }
 
