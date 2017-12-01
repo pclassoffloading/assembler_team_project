@@ -23,11 +23,19 @@ class NewPassTwo{
    }
    public void show_sourcelines(Source_line[] source_lines){
      System.out.println();
+     print_lst_intro();
       for (Source_line item : source_lines) {
          item.tell_lst_file();
          //item.tell_source_line();
       //System.out.printf("   object code App: %s%n",item.objectCode);
       }
+   }
+   public void print_lst_intro(){
+     System.out.println("*******************************************");
+     System.out.println("ASSEMBLER REPORT");
+     System.out.println("----------------");
+     System.out.println("      Loc   Object Code   Source Code");
+     System.out.println("      ---   -----------   -----------");
    }
    public void pass2_assembly(Source_line[] sourcelines){
 
@@ -108,8 +116,8 @@ class NewPassTwo{
                      }
                      //indirect addressing
                      else if(sourcelines[j].n.equals("1") && sourcelines[j].i.equals("0")){
-                           
-                     
+
+
                      }
                      else if(sourcelines[j].n.equals("0") && sourcelines[j].i.equals("1")){
 
@@ -119,20 +127,20 @@ class NewPassTwo{
 
                         //constant i.e. #0 #100 etc
                         if(sourcelines[j].p.equals("0") && sourcelines[j].b.equals("0")){
-                        
+
                            String binSymbol = mathLib.hexToBin12(symbol);
-                        
+
                            //calculate ObjectCode
-                           calculateObjectCode(sourcelines[j], opcodeBinary, binSymbol);                        
-                        
+                           calculateObjectCode(sourcelines[j], opcodeBinary, binSymbol);
+
                         }
                         else if(sourcelines[j].p.equals("1") && sourcelines[j].b.equals("0")){
-                           
+
                            String address = symtable.find(symbol).get_address();
                            String binAddress = mathLib.hexToBin12(address);
-                           
+
                            calculateObjectCode(sourcelines[j], opcodeBinary, binAddress);
-                        
+
                         }
 
                      }

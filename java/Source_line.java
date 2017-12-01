@@ -6,6 +6,7 @@ class Source_line{
    boolean isFour = false;//default is false
    String note = "";
    boolean isIndexed = false;//default
+   int sourceline_number = 0;
 
    String n = "";
    String i = "";
@@ -30,7 +31,15 @@ class Source_line{
       System.out.printf("address: %s, label: %s, mnemonic: %s, symbol: %s, note: %s,  %n",this.address, this.label,this.mnemonic,this.symbol, this.note);
    }
    public void tell_lst_file(){
-      System.out.printf("%8s %8s %8s %8s %8s %8s %n",this.address, this.objectCode, this.label,this.mnemonic,this.symbol, this.note);
+
+      String line_numb = "--"+Integer.toString(this.sourceline_number);
+      System.out.printf(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note));
+   }
+   public String fomat(String format_this){
+      try{
+        return ("             " + format_this).substring(format_this.length());
+      }catch(NullPointerException e){};
+      return "         null";
    }
 
    public void evaluate_total_line_count(String word, int word_numb, int total_line_count){

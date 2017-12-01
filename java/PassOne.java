@@ -30,8 +30,11 @@ class PassOne{
    return this.symtab;
  }
  public Source_line[] construct_map_addresses(){
+   int count = 0;
 
    for (Source_line item : this.source_lines) {//System.out.println(item.mnemonic);//if mnemonic is START then we are at the start of the program and need to set LOCCTR
+     item.sourceline_number = count++;
+
      try{
       if(item.label != null){this.symtab.createSymItem(item.label, this.LOCCTR);};
        if(item.mnemonic.equals("START")){//Set LOCCTR to starting address//i.e SUM START 100 is a program whose name is SUM and LOCCTR starts at 100
