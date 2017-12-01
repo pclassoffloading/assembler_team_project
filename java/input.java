@@ -2,12 +2,12 @@ import java.io.*;
 import java.io.File; //boolean createNewFile() This method atomically creates a new, empty file named by this abstract pathname if and only if a file with this name does not yet exist.
 import java.util.Scanner;
 import java.util.StringTokenizer;
-public class input{
+public class Input{
 	File file1; int srcln_count = 0;
 	Scanner fileLines;Scanner fileWords;
 	Source_line source_lines[];
 
-	public input(){
+	public Input(){
 
 	}
 	public void args_and_run(String arg)throws IOException{

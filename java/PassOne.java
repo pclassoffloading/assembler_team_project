@@ -9,7 +9,8 @@ class PassOne{
    String LOCCTR = "0";
    Math mathLib;
 
-   PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab, Math test){
+   PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab, Math test, String fileName){
+      System.out.println("passone" + fileName);
       this.optable = optable;
       this.source_lines = source_lines;
       this.symtab = symtab;

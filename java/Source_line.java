@@ -7,6 +7,7 @@ class Source_line{
    String note = "";
    boolean isIndexed = false;//default
    int sourceline_number = 0;
+   Output writefile;
 
    String n = "";
    String i = "";
@@ -16,6 +17,7 @@ class Source_line{
    String e = "";
 
    public Source_line(){
+     this.writefile = new Output();
    }
    public void add_To_Note(String note){
      this.note = this.note + " " + note;
@@ -30,10 +32,11 @@ class Source_line{
    public void tell_source_line(){
       System.out.printf("address: %s, label: %s, mnemonic: %s, symbol: %s, note: %s,  %n",this.address, this.label,this.mnemonic,this.symbol, this.note);
    }
-   public void tell_lst_file(){
+   public void tell_lst_file(String filename){
 
       String line_numb = "--"+Integer.toString(this.sourceline_number);
       System.out.printf(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note));
+      writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note)));
    }
    public String fomat(String format_this){
       try{

@@ -7,9 +7,14 @@ class NewPassTwo{
    public String objectCode;
    public boolean isFour, isIndexed;
    String B_Register;String displacement;
+   Output writefile;
+   String fileName;
 
-   public NewPassTwo(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test){
+   public NewPassTwo(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test, String fileName){
+     System.out.println("NewPassTwo" + fileName);
+
       this.optable = optable; this.symtable = symtable; this.sourcelines = sourcelines; this.mathLib = test;
+      this.fileName = fileName; this.writefile = new Output();
       //print_values();
       pass2_assembly(sourcelines);
       print_values();
@@ -25,17 +30,22 @@ class NewPassTwo{
      System.out.println();
      print_lst_intro();
       for (Source_line item : source_lines) {
-         item.tell_lst_file();
+         item.tell_lst_file(this.fileName);
          //item.tell_source_line();
       //System.out.printf("   object code App: %s%n",item.objectCode);
       }
    }
    public void print_lst_intro(){
      System.out.println("*******************************************");
+     this.writefile.write_file(this.fileName,".lst", "*******************************************\n");
      System.out.println("ASSEMBLER REPORT");
+     this.writefile.write_file(this.fileName,".lst", "ASSEMBLER REPORT\n");
      System.out.println("----------------");
+     this.writefile.write_file(this.fileName,".lst","----------------\n");
      System.out.println("      Loc   Object Code   Source Code");
+     this.writefile.write_file(this.fileName,".lst","      Loc   Object Code   Source Code\n");
      System.out.println("      ---   -----------   -----------");
+     this.writefile.write_file(this.fileName,".lst","      ---   -----------   -----------\n");
    }
    public void pass2_assembly(Source_line[] sourcelines){
 
@@ -51,13 +61,13 @@ class NewPassTwo{
 
          if(optable.find(mneumonic) != null){//if mneumonic exists in OPTAB (i.e. ADD, STA, etc)
             String opcode = optable.find(mneumonic).getOpcode();//grap opcode
-            
+
             //RSUB exception
             if(mneumonic.equals("RSUB")){
             sourcelines[j].set_objectCode("4f0000");
-            
+
             }
-            
+
             String format = optable.find(mneumonic).getFormatN();//get format
             switch(format){
                case "1"://format 1
@@ -67,7 +77,7 @@ class NewPassTwo{
                case "2"://format 2
                   objectCode = opcode + sourcelines[j].symbol;
                   sourcelines[j].set_objectCode(objectCode);
-               
+
                   break;
                case "3/4"://format 3 or 4
 
@@ -234,7 +244,7 @@ class NewPassTwo{
    }
 
    public Source_line is_indexed(Source_line sourceline){
-      sourceline.tell_source_line();
+      //sourceline.tell_source_line();
 
       try{
          if(sourceline.symbol.substring(sourceline.symbol.length()-2).equals(",X")){
