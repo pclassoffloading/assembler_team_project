@@ -43,12 +43,23 @@ class NewPassTwo{
 
          if(optable.find(mneumonic) != null){//if mneumonic exists in OPTAB (i.e. ADD, STA, etc)
             String opcode = optable.find(mneumonic).getOpcode();//grap opcode
+            
+            //RSUB exception
+            if(mneumonic.equals("RSUB")){
+            sourcelines[j].set_objectCode("4f0000");
+            
+            }
+            
             String format = optable.find(mneumonic).getFormatN();//get format
             switch(format){
                case "1"://format 1
-                  //objectCode = opcode;
+                  objectCode = opcode;
+                  sourcelines[j].set_objectCode(objectCode);
                   break;
                case "2"://format 2
+                  objectCode = opcode + sourcelines[j].symbol;
+                  sourcelines[j].set_objectCode(objectCode);
+               
                   break;
                case "3/4"://format 3 or 4
 
@@ -125,8 +136,6 @@ class NewPassTwo{
                         }
 
                      }
-
-
 
                   }//if is three
 
