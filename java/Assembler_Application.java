@@ -1,6 +1,7 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
+import java.io.*;
 public class Assembler_Application{
 int LOCCTR = 0;
 //sourceline should exist outside of scope and and passed into pass one and pass 2.
@@ -11,6 +12,7 @@ int LOCCTR = 0;
     }
 
        for(int i=0;i< args.length;i++){
+          Delete_Any_Old_Files(args[i]);
           Output writefile = new Output();
           Input textfile = new Input();
           try{
@@ -25,7 +27,6 @@ int LOCCTR = 0;
 
           NewPassTwo passtwo = new NewPassTwo(optable, symtab, source_lines, test, args[i]);
           printObjFile PrintObjFile = new printObjFile(source_lines, test, args[i]);
-
         }catch(FileNotFoundException exception){
           System.out.println();
           System.out.println("whoa, incorrect file name given.");
@@ -34,5 +35,17 @@ int LOCCTR = 0;
           System.out.println("thanks, this assembler team.");
         };
       }
+  }
+  public static void Delete_Any_Old_Files(String filename){
+    Delete_It_Already(modify_filename(filename, ".lst"));
+    Delete_It_Already(modify_filename(filename, ".obj"));
+  }
+  public static void Delete_It_Already(String filename){
+    File file = new File(filename);
+      if(file.delete()){System.out.println("File deleted successfully");}
+      else{System.out.println("Failed to delete the file");}
+  }
+  public static String modify_filename(String filename, String type){
+    return filename.substring(0, filename.length()-4)+type;
   }
 }

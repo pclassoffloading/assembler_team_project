@@ -5,6 +5,7 @@ public class Output{
     //write_file("filename.txt");
 
 	}
+
   public void write_file(String filename, String type, String message){
     if(type.equals(".lst")){
       filename = modify_filename(filename, type);
