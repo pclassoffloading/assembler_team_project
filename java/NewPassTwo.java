@@ -97,6 +97,8 @@ class NewPassTwo{
                      }
                      //indirect addressing
                      else if(sourcelines[j].n.equals("1") && sourcelines[j].i.equals("0")){
+                           
+                     
                      }
                      else if(sourcelines[j].n.equals("0") && sourcelines[j].i.equals("1")){
 
@@ -106,13 +108,20 @@ class NewPassTwo{
 
                         //constant i.e. #0 #100 etc
                         if(sourcelines[j].p.equals("0") && sourcelines[j].b.equals("0")){
-
-                        String binSymbol = mathLib.hexToBin12(symbol);
-
-                        //calculate ObjectCode
-                        calculateObjectCode(sourcelines[j], opcodeBinary, binSymbol);
-
-
+                        
+                           String binSymbol = mathLib.hexToBin12(symbol);
+                        
+                           //calculate ObjectCode
+                           calculateObjectCode(sourcelines[j], opcodeBinary, binSymbol);                        
+                        
+                        }
+                        else if(sourcelines[j].p.equals("1") && sourcelines[j].b.equals("0")){
+                           
+                           String address = symtable.find(symbol).get_address();
+                           String binAddress = mathLib.hexToBin12(address);
+                           
+                           calculateObjectCode(sourcelines[j], opcodeBinary, binAddress);
+                        
                         }
 
                      }
@@ -355,6 +364,8 @@ class NewPassTwo{
       int value = mathLib.convertHexToInt(displacement);
       if( value > 4095 || value < 0){
       //should fail
+      System.out.println("Displcament out of range: Should have been format 4");
+      source_line.tell_source_line();
       }
    }//BASEMODE
 }
