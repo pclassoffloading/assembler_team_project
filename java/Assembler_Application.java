@@ -32,7 +32,7 @@ int LOCCTR = 0;
           source_lines = passone.Pass1();
           symtab = passone.provide_symtable();
 
-          NewPassTwo passtwo = new NewPassTwo(optable, symtab, source_lines, test, args[i]);
+          PassTwo passtwo = new PassTwo(optable, symtab, source_lines, test, args[i]);
           PrintObjFile printObjFile = new PrintObjFile(source_lines, test, args[i]);
         }catch(FileNotFoundException exception){
           System.out.println();

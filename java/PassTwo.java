@@ -1,6 +1,6 @@
 
 
-class NewPassTwo{
+class PassTwo{
 
    OPTAB optable;SYMTAB symtable;Source_line[] sourcelines;Math mathLib;
 
@@ -10,7 +10,7 @@ class NewPassTwo{
    Output writefile;
    String fileName;
 
-   public NewPassTwo(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test, String fileName){
+   public PassTwo(OPTAB optable, SYMTAB symtable, Source_line[] sourcelines, Math test, String fileName){
      System.out.println("NewPassTwo" + fileName);
 
       this.optable = optable; this.symtable = symtable; this.sourcelines = sourcelines; this.mathLib = test;
