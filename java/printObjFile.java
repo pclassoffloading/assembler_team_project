@@ -1,15 +1,16 @@
 import java.io.*;
 class printObjFile{
 
-Math mathLib;
+   Math mathLib;
 
    public printObjFile(Source_line[] sourcelines, Math test){
-   this.mathLib = test;
+      this.mathLib = test;
    
       //header file
       printHeader(sourcelines);
       printTextRecords(sourcelines);
       printModificationRecords(sourcelines);
+      printEndRecord(sourcelines);
       
    }
    
@@ -47,14 +48,18 @@ Math mathLib;
    
       for(int c = 1; c < sourcelines.length; c++){
          if(sourcelines[c].isFour){
-         String address = mathLib.addHextoHex(sourcelines[c].get_address(), "1");
-         System.out.format("%c%-6s%2s\n",'M', padString(address), "05");
+            String address = mathLib.addHextoHex(sourcelines[c].get_address(), "1");
+            System.out.format("%c%-6s%2s\n",'M', padString(address), "05");
          }
       }
    }
    
+   public void printEndRecord(Source_line[] sourcelines){
+   System.out.println("E" + padString(sourcelines[0].get_address()));
+   }
+   
    public String padString(String s){
-   return "000000".substring(s.length()) + s;
+      return "000000".substring(s.length()) + s;
    }
    
  //  String padded = unpadded + "##########".substring(unpadded.length());
