@@ -2,7 +2,7 @@
 Ensure that Java is installed and in your path.
 <pre>
 git clone https://github.com/pclassoffloading/assembler_team_project.git;
-cd assembler_team_project;
+cd assembler_team_project/java;
 rm *.class; javac Assembler_Application.java; java Assembler_Application;
 </pre>
 ## jGrasp Instructions:
