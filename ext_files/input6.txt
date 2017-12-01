@@ -1,0 +1,18 @@
+.note .note
+SUM	    START 0       .note
+FIRST	  LDX   #0     
+.aosdhoaishd
+		    LDA   #0      .note
+		    +LDB  #TABLE2 .note odjao asodpin 
+		    BASE 	TABLE2  .note
+LOOP	  ADD 	TABLE,X .note
+		    ADD 	TABLE2,X .note
+		    TIX	  COUNT   .note
+		    JLT 	LOOP    .note
+		    +STA 	TOTAL   .note
+		    RSUB          .note
+COUNT 	RESW 	1       .note
+TABLE 	RESW	2000  
+TABLE2 	RESW 	2000    .note
+TOTAL 	RESW 	1       .note
+		    END 	FIRST   .note
