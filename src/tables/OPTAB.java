@@ -1,4 +1,5 @@
-package src;
+package src.tables;
+import src.*;
 public class OPTAB
 {
    DataItem[] OPARRAY;

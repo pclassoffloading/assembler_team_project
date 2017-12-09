@@ -1,5 +1,8 @@
 package src;
-import src.*;
+import src.assembly_guts.*;
+import src.math.*;
+import src.input_output.*;
+import src.tables.*;
 // Team Sweet & Sour
 // Camron Conway
 // Michael Dimmitt

@@ -1,9 +1,9 @@
-package src;
+package src.math;
 import java.*;
 import java.lang.*;
 import java.math.BigInteger;
 
-public interface Math {
+public interface ConversionCalculator {
 
    public static String convertIntToHex(int i){
       String testy = Integer.toHexString(i);

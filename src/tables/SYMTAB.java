@@ -1,4 +1,5 @@
-package src;
+package src.tables;
+import src.*;
 // public class testingOptab {
 //
 //    public static void main(String args[]){
@@ -21,33 +22,7 @@ package src;
 
 
 
-class SymItem{
-   String label;
-   String address;
 
-   public SymItem(String label, String address){
-      this.label = label;
-      this.address = address;
-   }//constructor SymItem
-
-   public void printSymItem(int ind_of_hash){
-      System.out.println("label: " + label + " address: " + address + " hash index: " + ind_of_hash);
-
-   }//printSymItem
-
-   public String getKey(){
-      return label;
-   }//getKey
-
-   public String get_address(){
-      return address;
-   }
-
-   public String get_label(){
-      return label;
-   }
-
-}//SymItem
 
 public class SYMTAB
 {

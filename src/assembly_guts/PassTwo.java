@@ -1,4 +1,7 @@
-package src;
+package src.assembly_guts;
+import src.math.*;
+import src.input_output.*;
+import src.tables.*;
 public class PassTwo{
 
    OPTAB optable;SYMTAB symtable;Source_line[] sourcelines;
@@ -81,7 +84,7 @@ public class PassTwo{
                   if(!sourcelines[j].isFour){//if is three
                      sourcelines[j].e = "0";
                      //convert opcode to binary, and "chop off" last two bits
-                     String opcodeBinary = Math.hexToBin(opcode);
+                     String opcodeBinary = ConversionCalculator.hexToBin(opcode);
                      //chop off
                      opcodeBinary = opcodeBinary.substring(0,6);
                      //simple addressing
@@ -91,7 +94,7 @@ public class PassTwo{
                            //TA is symbol itself
                            String symbol = sourcelines[j].symbol;
                            //convert to binary
-                           String binarySym = Math.hexToBin(symbol);
+                           String binarySym = ConversionCalculator.hexToBin(symbol);
                            //displacement must be 12 bits long
                            if(binarySym.length() != 12){
                               int value = 12 - (binarySym.length() % 12);
@@ -106,7 +109,7 @@ public class PassTwo{
                            try{PCMODE(sourcelines[j], sourcelines[j+1]);}
                            catch (Exception exception) {};
                            //String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e;
-                           String binDisplacement = Math.hexToBin12(displacement);
+                           String binDisplacement = ConversionCalculator.hexToBin12(displacement);
                            calculateObjectCode(sourcelines[j], opcodeBinary, binDisplacement);
                         }
                      }
@@ -119,13 +122,13 @@ public class PassTwo{
                         symbol = symbol.substring(1);
                         //constant i.e. #0 #100 etc
                         if(sourcelines[j].p.equals("0") && sourcelines[j].b.equals("0")){
-                           String binSymbol = Math.hexToBin12(symbol);
+                           String binSymbol = ConversionCalculator.hexToBin12(symbol);
                            //calculate ObjectCode
                            calculateObjectCode(sourcelines[j], opcodeBinary, binSymbol);
                         }
                         else if(sourcelines[j].p.equals("1") && sourcelines[j].b.equals("0")){
                            String address = symtable.find(symbol).get_address();
-                           String binAddress = Math.hexToBin12(address);
+                           String binAddress = ConversionCalculator.hexToBin12(address);
                            calculateObjectCode(sourcelines[j], opcodeBinary, binAddress);
                         }
                      }
@@ -151,20 +154,20 @@ public class PassTwo{
                      catch (Exception exception) {};
 
                    //convert opcode to binary, and "chop off" last two bits
-                     String opcodeBinary = Math.hexToBin(opcode);
+                     String opcodeBinary = ConversionCalculator.hexToBin(opcode);
 
                    //chop off
                      opcodeBinary = opcodeBinary.substring(0,6);
 
                    //convert address to binary
-                     String binaryAddress = Math.hexToBin_Addr(targetAddress);
+                     String binaryAddress = ConversionCalculator.hexToBin_Addr(targetAddress);
 
                      //then we concatanate with n,i,x,b,p,e and adddress
                      System.out.println("n "+sourcelines[j].n + " i "+sourcelines[j].i + " x "+sourcelines[j].x + " b "+sourcelines[j].b + " p "+sourcelines[j].p + " e "+sourcelines[j].e);
                      String binaryObjectCode = opcodeBinary + sourcelines[j].n + sourcelines[j].i + sourcelines[j].x + sourcelines[j].b + sourcelines[j].p + sourcelines[j].e + binaryAddress;
 
                      //then convert back to Hex
-                     objectCode = Math.binToHex(binaryObjectCode);
+                     objectCode = ConversionCalculator.binToHex(binaryObjectCode);
 
                      //binToHex chops off leading zeros so we need to bring them back
                      if(objectCode.length() != 8){
@@ -188,7 +191,7 @@ public class PassTwo{
       //calulate objectCode
 
       String binaryObjectCode = opcodeBinary + sourceline.n + sourceline.i + sourceline.x + sourceline.b + sourceline.p + sourceline.e + displacement;
-      this.objectCode = Math.binToHex(binaryObjectCode);
+      this.objectCode = ConversionCalculator.binToHex(binaryObjectCode);
 
       //binToHex cuts off leading 0's so make sure is 6 bytes long
       if(objectCode.length() != 6){
@@ -314,8 +317,8 @@ public class PassTwo{
      String address = this.symtable.find(label).get_address();
 
      //calculate displacement
-     this.displacement = Math.subHextoHex(address, address_2);
-     int value = Math.convertHexToInt(this.displacement);
+     this.displacement = ConversionCalculator.subHextoHex(address, address_2);
+     int value = ConversionCalculator.convertHexToInt(this.displacement);
 
      //if displacement is bigger than 2047 or less than -2048
       if(value > 2047 || value < -2048){
@@ -329,9 +332,9 @@ public class PassTwo{
       source_line.b = "1";
 
      //calculate address - BASE register
-      this.displacement = Math.subHextoHex(address, B_Register);
+      this.displacement = ConversionCalculator.subHextoHex(address, B_Register);
      //if displacement is bigger than 4095 or less than 0, then fail
-      int value = Math.convertHexToInt(displacement);
+      int value = ConversionCalculator.convertHexToInt(displacement);
       if( value > 4095 || value < 0){
       //should fail
         System.out.println("Displcament out of range: Should have been format 4");

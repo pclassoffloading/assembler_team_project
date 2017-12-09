@@ -1,6 +1,8 @@
-package src;
-import java.io.*;
-public class PrintObjFile{
+package src.input_output;
+import src.math.*;
+import src.*;
+import src.assembly_guts.Source_line;
+public class PrintObjFile implements ConversionCalculator{
 //writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note)));
 //this.writefile.write_file(this.fileName,".lst","----------------\n");
 
@@ -66,7 +68,7 @@ public class PrintObjFile{
             }//else
          }//if
       }//for
-      textRecord = textRecord.substring(0,7) + Math.convertIntToHex(tCounter/2) + textRecord.substring(7, textRecord.length());
+      textRecord = textRecord.substring(0,7) + ConversionCalculator.convertIntToHex(tCounter/2) + textRecord.substring(7, textRecord.length());
       System.out.println(textRecord);
       this.writefile.write_file(this.fileName, ".obj", textRecord);
    }
@@ -75,7 +77,7 @@ public class PrintObjFile{
 
       for(int c = 1; c < sourcelines.length; c++){
          if(sourcelines[c].isFour){
-            String address = Math.addHextoHex(sourcelines[c].get_address(), "1");
+            String address = ConversionCalculator.addHextoHex(sourcelines[c].get_address(), "1");
             System.out.format("%c%-6s%2s\n",'M', padString(address), "05");
             this.writefile.write_file(this.fileName, ".obj", String.format("%c%-6s%2s\n",'M', padString(address), "05"));
          }

@@ -1,4 +1,5 @@
-package src;
+package src.input_output;
+
 import java.io.*;
 public class Output{
 

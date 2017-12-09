@@ -1,13 +1,14 @@
-package src;
-class Source_line{
-   String label, mnemonic, symbol, objectCode;
-   String address = "";
-   int format;
-   boolean isFour = false;//default is false
-   String note = "";
-   boolean isIndexed = false;//default
-   int sourceline_number = 0;
-   Output writefile;
+package src.assembly_guts;
+import src.input_output.*;
+public class Source_line{
+   public String label, mnemonic, symbol, objectCode;
+   public String address = "";
+   public int format;
+   public boolean isFour = false;//default is false
+   public String note = "";
+   public boolean isIndexed = false;//default
+   public int sourceline_number = 0;
+   public Output writefile;
 
    String n = "";
    String i = "";

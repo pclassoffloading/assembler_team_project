@@ -1,4 +1,6 @@
-package src;
+package src.assembly_guts;
+import src.math.*;
+import src.tables.*;
 public class PassOne{//String label, mnemonic, symbol;
   Source_line source_lines[];SYMTAB symtab;OPTAB optable;
   boolean isFour;String LOCCTR = "0";
@@ -28,21 +30,21 @@ public class PassOne{//String label, mnemonic, symbol;
         else{//format is of LABEL MNEMONIC SYMBOL//If the mnumonic is within OPTAB we can simply determine how many addresses the line uses by the FormatN//i.e Format 1 is 1, Format 2 is 2, Format 3 is 3, and Format 4 is 4 bytes
           item.set_address(this.LOCCTR);
           //if operation is in i.e WORD RESW BYTE RESBYTE
-          if(item.mnemonic.equals("WORD")){this.LOCCTR = Math.addHextoHex("3", this.LOCCTR);                                                      }
-          if(item.mnemonic.equals("RESW")){this.LOCCTR = Math.addHextoHex(Math.convertIntToHex(Math.toInt(item.symbol) * 3), this.LOCCTR);  }
+          if(item.mnemonic.equals("WORD")){this.LOCCTR = ConversionCalculator.addHextoHex("3", this.LOCCTR);                                                      }
+          if(item.mnemonic.equals("RESW")){this.LOCCTR = ConversionCalculator.addHextoHex(ConversionCalculator.convertIntToHex(ConversionCalculator.toInt(item.symbol) * 3), this.LOCCTR);  }
           if(item.mnemonic.equals("BYTE")){byteCondition(item.symbol.charAt(0), item.symbol);                                                        }
-          if(item.mnemonic.equals("RESB")){this.LOCCTR = Math.addHextoHex(Math.convertIntToHex(Math.toInt(item.symbol) * 1), this.LOCCTR);  }
+          if(item.mnemonic.equals("RESB")){this.LOCCTR = ConversionCalculator.addHextoHex(ConversionCalculator.convertIntToHex(ConversionCalculator.toInt(item.symbol) * 1), this.LOCCTR);  }
 
           boolean exist; DataItem temp;
           temp = this.optable.find(item.mnemonic);
 
           switch (temp.formatN.charAt(0)) {
 
-            case '1':if(does_mnemonic_exist(item, item.mnemonic)){this.LOCCTR = Math.addHextoHex("1", this.LOCCTR);}break;
+            case '1':if(does_mnemonic_exist(item, item.mnemonic)){this.LOCCTR = ConversionCalculator.addHextoHex("1", this.LOCCTR);}break;
 
-            case '2':if(does_mnemonic_exist(item, item.mnemonic)){this.LOCCTR = Math.addHextoHex("2", this.LOCCTR);}break;
+            case '2':if(does_mnemonic_exist(item, item.mnemonic)){this.LOCCTR = ConversionCalculator.addHextoHex("2", this.LOCCTR);}break;
 
-            case '3':this.LOCCTR = Math.addHextoHex(check_if_four(item.mnemonic.substring(1)), this.LOCCTR);break;
+            case '3':this.LOCCTR = ConversionCalculator.addHextoHex(check_if_four(item.mnemonic.substring(1)), this.LOCCTR);break;
 
             default:item.set_address(this.LOCCTR);break;
           }

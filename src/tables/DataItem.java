@@ -1,5 +1,5 @@
-package src;
-class DataItem{
+package src.tables;
+public class DataItem{
    public String mnumonic;
    public String opcode;
    public String formatN;
