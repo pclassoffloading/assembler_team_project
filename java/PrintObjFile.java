@@ -2,12 +2,11 @@ import java.io.*;
 class PrintObjFile{
 //writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note)));
 //this.writefile.write_file(this.fileName,".lst","----------------\n");
-   Math mathLib;
+
    Output writefile;
    String fileName;
 
-   public PrintObjFile(Source_line[] sourcelines, Math test,String fileName){
-      this.mathLib = test;
+   public PrintObjFile(Source_line[] sourcelines,String fileName){
       this.writefile = new Output();
       this.fileName = fileName;
 
@@ -66,7 +65,7 @@ class PrintObjFile{
             }//else
          }//if
       }//for
-      textRecord = textRecord.substring(0,7) + mathLib.convertIntToHex(tCounter/2) + textRecord.substring(7, textRecord.length());
+      textRecord = textRecord.substring(0,7) + Math.convertIntToHex(tCounter/2) + textRecord.substring(7, textRecord.length());
       System.out.println(textRecord);
       this.writefile.write_file(this.fileName, ".obj", textRecord);
    }
@@ -75,7 +74,7 @@ class PrintObjFile{
 
       for(int c = 1; c < sourcelines.length; c++){
          if(sourcelines[c].isFour){
-            String address = mathLib.addHextoHex(sourcelines[c].get_address(), "1");
+            String address = Math.addHextoHex(sourcelines[c].get_address(), "1");
             System.out.format("%c%-6s%2s\n",'M', padString(address), "05");
             this.writefile.write_file(this.fileName, ".obj", String.format("%c%-6s%2s\n",'M', padString(address), "05"));
          }

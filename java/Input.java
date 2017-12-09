@@ -10,10 +10,12 @@ public class Input{
 	public Input(){
 
 	}
-	public void args_and_run(String arg)throws IOException{
 
+	public Source_line[] args_and_run(String arg)throws IOException{
 		initialize_vars(loc(arg));
+		System.out.println(loc(arg));
 		readEachLine(this.fileLines);
+		return provide_source_lines();
 	}
 
 	public void prompt_and_run()throws IOException{
