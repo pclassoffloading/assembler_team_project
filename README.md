@@ -1,10 +1,11 @@
 ## Terminal Insructions:
 Ensure that Java is installed and in your path.
-<pre>
+```Bash
 git clone https://github.com/pclassoffloading/assembler_team_project.git;
 cd assembler_team_project/java;
-rm *.class; javac Assembler_Application.java; java Assembler_Application;
-</pre>
+rm */*/*.lst; rm */*/*.obj; rm */*/*.class;rm */*.lst; rm */*.obj; rm */*.class;
+javac src/Assembler_Application.java; java src/Assembler_Application input.txt;
+```
 ## jGrasp Instructions:
 Ensure that jGrasp is installed. If not please download [HERE](http://spider.eng.auburn.edu/user-cgi/grasp/grasp.pl?;dl=download_jgrasp.html)
 <pre>
