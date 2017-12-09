@@ -1,4 +1,5 @@
-class OPTAB
+package src;
+public class OPTAB
 {
    DataItem[] OPARRAY;
    private int arraySize;
@@ -65,7 +66,7 @@ class OPTAB
       }//while
       return null; //couldn't find it
    }//find
-   
+
       public void displayTable()
    {
       String header = "Index  String\n";

@@ -1,5 +1,6 @@
+package src;
 import java.io.*;
-class PrintObjFile{
+public class PrintObjFile{
 //writefile.write_file(filename, ".lst", String.format(" %s %s %s %s %s %s %n", fomat(line_numb).substring(fomat(line_numb).length()-3), fomat(this.address).substring(fomat(this.address).length()-4), fomat(this.objectCode), fomat(this.label),fomat(this.mnemonic),fomat(this.symbol), fomat(this.note)));
 //this.writefile.write_file(this.fileName,".lst","----------------\n");
 

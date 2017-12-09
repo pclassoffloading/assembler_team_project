@@ -1,8 +1,9 @@
-class PassOne{//String label, mnemonic, symbol;
+package src;
+public class PassOne{//String label, mnemonic, symbol;
   Source_line source_lines[];SYMTAB symtab;OPTAB optable;
   boolean isFour;String LOCCTR = "0";
 
-  PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab, String fileName){
+  public PassOne(OPTAB optable, Source_line source_lines[], SYMTAB symtab, String fileName){
     this.optable = optable;this.source_lines = source_lines;
     this.symtab = symtab;
   }

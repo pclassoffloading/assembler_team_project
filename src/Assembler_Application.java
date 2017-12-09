@@ -1,3 +1,5 @@
+package src;
+import src.*;
 // Team Sweet & Sour
 // Camron Conway
 // Michael Dimmitt

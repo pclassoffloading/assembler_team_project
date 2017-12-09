@@ -1,3 +1,4 @@
+package src;
 // public class testingOptab {
 //
 //    public static void main(String args[]){
@@ -48,7 +49,7 @@ class SymItem{
 
 }//SymItem
 
-class SYMTAB
+public class SYMTAB
 {
    private SymItem[] SYMARRAY;
    private int arraySize;

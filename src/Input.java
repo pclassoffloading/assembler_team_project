@@ -1,3 +1,4 @@
+package src;
 import java.io.*;
 import java.io.File; //boolean createNewFile() This method atomically creates a new, empty file named by this abstract pathname if and only if a file with this name does not yet exist.
 import java.util.Scanner;
@@ -36,7 +37,10 @@ public class Input{
 
 	}
 	public String loc(String text){
-		 return "../ext_files/".concat(text);
+//		 return "../src/ext_files/".concat(text);
+		 //return "../../ext_files/".concat(text);
+		 return "ext_files/".concat(text);
+
 	}
 	public void readEachLine(Scanner fileInput1)throws IOException{
 		while (fileInput1.hasNext()){

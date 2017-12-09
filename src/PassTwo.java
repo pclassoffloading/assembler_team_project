@@ -1,4 +1,5 @@
-class PassTwo{
+package src;
+public class PassTwo{
 
    OPTAB optable;SYMTAB symtable;Source_line[] sourcelines;
 
